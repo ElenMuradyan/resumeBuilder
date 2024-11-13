@@ -24,8 +24,7 @@ const Register = () => {
             })
             form.resetFields();
             navigate(ROUTE_CONSTANTS.LOGIN);
-        }catch(e){
-            console.log(e)
+        }catch{
             notification.error({
                 message: 'Invalid Register Credentials'
             })
@@ -82,7 +81,7 @@ const Register = () => {
             </Form.Item>
             <Button htmlType="submit">Sign up</Button>
             <Title level={4}>Already have an account?</Title>
-            <Link>Sign in</Link>  {/* Todo */} 
+            <Link to={ROUTE_CONSTANTS.LOGIN}>Sign in</Link>  
         </Form>
     )
 }

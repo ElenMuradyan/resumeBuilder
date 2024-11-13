@@ -29,7 +29,7 @@ const steps = [
   },
 ];
 
-const Main = () => {
+const MainPage = () => {
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
 
@@ -89,4 +89,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainPage;

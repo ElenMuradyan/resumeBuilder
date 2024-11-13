@@ -1,4 +1,4 @@
-import ProfileSection from "../../components/sheard/ProfileSection";
+import ProfileSection from "../../components/sheard/MainComponents/ProfileSection";
 
 export const steps = [
     {

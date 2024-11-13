@@ -1,5 +1,5 @@
 import { Form, Input, Typography, Flex, Col } from "antd";
-import { PhoneNumberValidation } from "../../../core/utils/constants";
+import { PhoneNumberValidation } from "../../../../core/utils/constants";
 
 const { Title } = Typography;
 

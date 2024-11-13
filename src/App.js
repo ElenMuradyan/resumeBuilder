@@ -10,17 +10,18 @@ import { useEffect } from "react";
 import { ROUTE_CONSTANTS } from "./core/utils/constants";
 
 import './styles/global.css';
+import LoadingWrapper from "./components/sheard/LoadingWrapper";
 
 function App() {
   const dispatch = useDispatch();
-  const { userProfileInfo: { isAuth }, loading} = useSelector(store => store.userProfile);
+  const { userProfileInfo: { isAuth } } = useSelector(store => store.userProfile);
 
   useEffect(() => {
     dispatch(fetchUserProfileInfo());
   },[isAuth, dispatch]);
 
   return (
-    <div className="App">
+    <LoadingWrapper>
       <RouterProvider
       router={
         createBrowserRouter(
@@ -41,7 +42,7 @@ function App() {
         )
       }
       />
-    </div>
+    </LoadingWrapper>
   );
 }
 

@@ -9,6 +9,8 @@ import { fetchUserProfileInfo } from "./state-management/slices/userProfile";
 import { useEffect } from "react";
 import { ROUTE_CONSTANTS } from "./core/utils/constants";
 
+import './styles/global.css';
+
 function App() {
   const dispatch = useDispatch();
   const { userProfileInfo: { isAuth }, loading} = useSelector(store => store.userProfile);

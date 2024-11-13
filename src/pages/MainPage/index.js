@@ -1,52 +1,28 @@
-import { Button, message, theme, Steps } from 'antd';
+import { Button, theme, Steps, Flex } from 'antd';
 import { useState } from 'react';
-
-const steps = [
-  {
-    title: 'Profile Section',
-    content: 'First-content',
-    status: 'process'
-  },
-  {
-    title: 'Education Section',
-    content: 'Second-content',
-    status: 'process'
-  },
-  {
-    title: 'Skills Sector',
-    content: 'Last-content',
-    status: 'process'
-  },
-  {
-    title: 'Mini Project',
-    content: 'Last-content',
-    status: 'process'
-  },
-  {
-    title: 'Social',
-    content: 'Last-content',
-    status: 'process'
-  },
-];
+import { items, steps } from '../../core/utils/mainPage';
 
 const MainPage = () => {
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
-
   const next = () => {
+    if(current === 4){
+      setCurrent(0);
+      return;
+    }
     setCurrent(current + 1);
   };
 
   const prev = () => {
-    setCurrent(current - 1);
+    if (current === 0){
+      setCurrent(4);
+      return;
+    }
+  setCurrent(current - 1);
   };
 
-  const items = steps.map((item) => ({
-    key: item.title,
-    title: item.title,
-    status: item.status
-  }));
   const contentStyle = {
+    width: '100%',
     lineHeight: '260px',
     textAlign: 'center',
     color: token.colorTextTertiary,
@@ -56,25 +32,14 @@ const MainPage = () => {
     marginTop: 16,
   };
   return (
-    <>
+    <Flex align='center' gap={10} vertical style={{padding:'10px'}}>
       <Steps current={current} items={items} />
       <div style={contentStyle}>{steps[current].content}</div>
-      <div
-        style={{
-          marginTop: 24,
-        }}
-      >
-        {current < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
+      <Flex justify='space-between' gap={10} style={{width:'50%'}}>
+      <Button type="primary" onClick={() => next()}>
             Next
           </Button>
-        )}
-        {current === steps.length - 1 && (
-          <Button type="primary" onClick={() => message.success('Processing complete!')}>
-            Done
-          </Button>
-        )}
-        {current > 0 && (
+        <Button type='primary' htmlType='submit'>Save and continue</Button>
           <Button
             style={{
               margin: '0 8px',
@@ -83,9 +48,8 @@ const MainPage = () => {
           >
             Previous
           </Button>
-        )}
-      </div>
-    </>
+      </Flex>
+    </Flex>
   );
 };
 

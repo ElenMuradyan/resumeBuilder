@@ -11,6 +11,7 @@ import { ROUTE_CONSTANTS } from "./core/utils/constants";
 
 import './styles/global.css';
 import LoadingWrapper from "./components/sheard/LoadingWrapper";
+import WelcomePage from "./pages/WelcomePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ function App() {
                 {/*Cabinet */}
 
               <Route path={ROUTE_CONSTANTS.CABINET} element={isAuth ? <CabinetLayout/> : <Navigate to={ROUTE_CONSTANTS.LOGIN}/>}>
-                <Route index element={<MainPage/>}></Route>
+                <Route index element={<WelcomePage/>}></Route>
                 <Route path={ROUTE_CONSTANTS.MAIN} element={<MainPage/>}/>
               </Route>
             </Route>

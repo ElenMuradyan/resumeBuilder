@@ -2,16 +2,23 @@ import { Form, Input, Typography, Flex, Col, Button } from "antd";
 import { PhoneNumberValidation } from "../../../../core/utils/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { setProfileSection } from "../../../../state-management/slices/ResumeInfo";
-
+import { saveProfileToFirestore } from "../../../../core/functions/createResume";
 const { Title } = Typography;
 
 const ProfileSection = () => {
     const [ form ] = Form.useForm();
-    const { profileSection } = useSelector(store => store.resumeInfo)
+    const { resumeData: { profileSection }, resumeId } = useSelector(store => store.resumeInfo);
+    const { userProfileInfo: { userData } } = useSelector(store => store.userProfile);
     const dispatch = useDispatch();
 
-    const handleData = values => {
+    const handleData = async values => {
         dispatch(setProfileSection(values));
+
+        try {
+            await saveProfileToFirestore(userData.uid, resumeId, 'profileSection' ,values);
+        } catch (error) {
+            console.error('Error saving profile to Firestore:', error);
+        }
     };
 
     return(

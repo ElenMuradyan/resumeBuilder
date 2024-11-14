@@ -4,13 +4,15 @@ export const regexpValidation = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]
 
 export const FIRESTORE_PATH_NAMES = {
     REGISTER_USERS: 'registered_users',
+    RESUMES: 'resumes',
 };
 
 export const ROUTE_CONSTANTS={
     LOGIN:'/login',
     REGISTER:'/register',
     CABINET:'/cabinet',
-    MAIN:'/cabinet/main'
+    MAIN:'/cabinet/main',
+    WELCOMEPAGE: '/cabinet/start'
 };
 
 export const PhoneNumberValidation = (rule, value) => {

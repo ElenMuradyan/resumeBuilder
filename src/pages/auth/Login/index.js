@@ -23,7 +23,7 @@ const Login = () => {
             const { email, password } = values;
             await signInWithEmailAndPassword(auth, email, password);
             form.resetFields();
-            navigate(ROUTE_CONSTANTS.MAIN);
+            navigate(ROUTE_CONSTANTS.WELCOMEPAGE);
             dispatch(setIsAuth(true));
             dispatch(fetchUserProfileInfo());
         }catch{

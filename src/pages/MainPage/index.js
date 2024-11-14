@@ -39,7 +39,6 @@ const MainPage = () => {
       <Button type="primary" onClick={() => next()}>
             Next
           </Button>
-        <Button type='primary' htmlType='submit'>Save and continue</Button>
           <Button
             style={{
               margin: '0 8px',

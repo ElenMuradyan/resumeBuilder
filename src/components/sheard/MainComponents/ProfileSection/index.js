@@ -1,19 +1,27 @@
-import { Form, Input, Typography, Flex, Col } from "antd";
+import { Form, Input, Typography, Flex, Col, Button } from "antd";
 import { PhoneNumberValidation } from "../../../../core/utils/constants";
+import { useSelector, useDispatch } from "react-redux";
+import { setProfileSection } from "../../../../state-management/slices/ResumeInfo";
 
 const { Title } = Typography;
 
 const ProfileSection = () => {
     const [ form ] = Form.useForm();
+    const { profileSection } = useSelector(store => store.resumeInfo)
+    const dispatch = useDispatch();
 
     const handleData = values => {
-
+        dispatch(setProfileSection(values));
     };
 
     return(
         <>
         <Title>Add your profile details</Title>
-        <Form form={form} onFinish={handleData} className='Form' style={{width: '100%', padding: '3%'}}> 
+        <Form 
+        form={form}
+        onFinish={handleData}
+        initialValues={profileSection}
+        style={{width: '100%', padding: '3%'}}> 
             <Flex justify='space-between'>
                 <Col style={{width: '48%'}}>
                     <Form.Item
@@ -68,6 +76,9 @@ const ProfileSection = () => {
                 </Form.Item>
                 </Col>
             </Flex>
+            <Form.Item>
+            </Form.Item>
+            <Button type='primary' htmlType='submit'>Save and continue</Button>
             </Form>
         </>
     )

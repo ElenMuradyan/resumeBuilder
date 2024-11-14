@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchUserProfileInfo());
-  },[isAuth, dispatch]);
+  },[]);
 
   return (
     <LoadingWrapper>

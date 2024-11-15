@@ -1,24 +1,19 @@
 import { Button, theme, Steps, Flex } from 'antd';
 import { useState } from 'react';
 import { items, steps } from '../../core/utils/mainPage';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { incrementCurrent, decrementCurrent } from '../../state-management/slices/mainSlice';
 const MainPage = () => {
   const { token } = theme.useToken();
-  const [current, setCurrent] = useState(0);
+  const { current } = useSelector(store => store.main);
+  const dispatch = useDispatch();
+
   const next = () => {
-    if(current === 4){
-      setCurrent(0);
-      return;
-    }
-    setCurrent(current + 1);
+    dispatch(incrementCurrent());
   };
 
   const prev = () => {
-    if (current === 0){
-      setCurrent(4);
-      return;
-    }
-  setCurrent(current - 1);
+    dispatch(decrementCurrent());
   };
 
   const contentStyle = {
@@ -38,7 +33,7 @@ const MainPage = () => {
       <Flex justify='space-between' gap={10} style={{width:'50%'}}>
       <Button type="primary" onClick={() => next()}>
             Next
-          </Button>
+      </Button>
           <Button
             style={{
               margin: '0 8px',

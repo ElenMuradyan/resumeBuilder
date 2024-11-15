@@ -32,7 +32,7 @@ const initialState = {
         miniProjects: [miniProject],
         socialSection: [socialLink]
     },
-    resumeId: new Date().getTime().toString(),
+    resumeId: '1234567890',
 };
 
 const resumeInfoSlice = createSlice({
@@ -43,10 +43,13 @@ const resumeInfoSlice = createSlice({
             state.resumeData.profileSection = action.payload;
         },
         setResumeId: (state) => {
-            state.resumeId = new Date().getTime().toString();
+            // state.resumeId = new Date().getTime().toString();
+        },
+        setImgUrl: (state, action) => {
+            state.resumeData.profileSection.imgUrl = action.payload;
         },
     },
 })
 
 export default resumeInfoSlice.reducer;
-export const { setProfileSection, setResumeId } = resumeInfoSlice.actions;
+export const { setProfileSection, setResumeId, setImgUrl } = resumeInfoSlice.actions;

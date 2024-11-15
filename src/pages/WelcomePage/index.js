@@ -13,7 +13,8 @@ const WelcomePage = () => {
     const dispatch = useDispatch();
 
     const handleStart = async () => {
-        dispatch(setResumeId());
+        // dispatch(setResumeId());
+        console.log(resumeId)
         try{
             await createResume(userData.uid, resumeId, resumeData);
         }catch(e){

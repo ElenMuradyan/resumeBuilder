@@ -8,10 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfileInfo } from "./state-management/slices/userProfile";
 import { useEffect } from "react";
 import { ROUTE_CONSTANTS } from "./core/utils/constants";
-
-import './styles/global.css';
 import LoadingWrapper from "./components/sheard/LoadingWrapper";
 import WelcomePage from "./pages/WelcomePage";
+
+import './styles/global.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ function App() {
               <Route path={ROUTE_CONSTANTS.CABINET} element={isAuth ? <CabinetLayout/> : <Navigate to={ROUTE_CONSTANTS.LOGIN}/>}>
                 <Route index element={<WelcomePage/>}></Route>
                 <Route path={ROUTE_CONSTANTS.MAIN} element={<MainPage/>}/>
+                <Route path={ROUTE_CONSTANTS.WELCOMEPAGE} element={<WelcomePage/>}/>
               </Route>
             </Route>
           )

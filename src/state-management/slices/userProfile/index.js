@@ -43,7 +43,7 @@ const userProfileSlice = createSlice({
     reducers: {
         setIsAuth: (state, action) => {
             state.userProfileInfo.isAuth = action.payload;
-        }
+        },
     },
     extraReducers: promise => {
         promise

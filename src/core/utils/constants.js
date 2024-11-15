@@ -15,6 +15,10 @@ export const ROUTE_CONSTANTS={
     WELCOMEPAGE: '/cabinet/start'
 };
 
+export const STORAGE_PATH_NAMES = {
+    RESUME_IMAGES: 'resume_images'
+}
+
 export const PhoneNumberValidation = (rule, value) => {
     if (!value) {
         return Promise.reject();
@@ -24,3 +28,4 @@ export const PhoneNumberValidation = (rule, value) => {
 
     return Promise.resolve();
 };
+

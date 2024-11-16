@@ -22,8 +22,11 @@ const mainSlice = createSlice({
                 state.current--;
             }
         },
+        setCurrent: (state, action) => {
+            state.current = action.payload;
+        }
     }
 })
 
 export default mainSlice.reducer;
-export const { decrementCurrent, incrementCurrent } = mainSlice.actions;
+export const { decrementCurrent, incrementCurrent, setCurrent } = mainSlice.actions;

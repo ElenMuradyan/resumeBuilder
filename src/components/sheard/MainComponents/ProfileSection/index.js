@@ -166,7 +166,7 @@ const ProfileSection = () => {
                 />
             </Form.Item>
             <Button type='primary' htmlType='submit'>Save and continue</Button>
-            <Title level={5} style={{color:'rgba(0, 136, 255, 0.487)', margin:0}}>If you made changes don't forget to save them</Title>
+            <Title level={5} style={{color:'rgba(0, 136, 255, 0.487)', margin:0}}>If you have made changes don't forget to save them</Title>
             </Form>
         </>
     )

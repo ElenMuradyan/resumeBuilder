@@ -1,35 +1,31 @@
+import EducationSection from "../../components/sheard/MainComponents/EducationSection";
+// import MiniProjectSection from "../../components/sheard/MainComponents/MiniProjects";
 import ProfileSection from "../../components/sheard/MainComponents/ProfileSection";
 
-export const steps = [
+export const items = [
     {
-      title: 'Profile Section',
-      content: <ProfileSection/>,
-      status: 'process'
+      key: '0',
+      label: 'Tab 1',
+      children: <ProfileSection/>,
     },
     {
-      title: 'Education Section',
-      content: 'Second-content',
-      status: 'process'
-    },
-    {
-      title: 'Skills Sector',
-      content: 'Last-content',
-      status: 'process'
-    },
-    {
-      title: 'Mini Project',
-      content: 'Last-content',
-      status: 'process'
-    },
-    {
-      title: 'Social',
-      content: 'Last-content',
-      status: 'process'
-    },
-  ];
-  
-export const items = steps.map((item) => ({
-    key: item.title,
-    title: item.title,
-    status: item.status
-}));
+        key: '1',
+        label: 'Tab 2',
+        children: <EducationSection/>,
+      },
+      {
+        key: '2',
+        label: 'Tab 3',
+        children:'content',
+      },
+      {
+        key: '3',
+        label: 'Tab 4',
+        children: 'Content of Tab Pane 2',
+      },
+      {
+        key: '4',
+        label: 'Tab 5',
+        children: 'Content of Tab Pane 3',
+      },
+]

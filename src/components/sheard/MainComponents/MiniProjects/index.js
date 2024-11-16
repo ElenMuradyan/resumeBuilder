@@ -71,7 +71,7 @@ const MiniProjectSection = () => {
         <>
         <Title>Add your Mini Projects</Title>
         <div>
-            <Form form={form} onFinish={handleData} onValuesChange={handleFieldChange}>
+            <Form form={form} onFinish={handleData} onValuesChange={handleFieldChange} vertical>
                 {
                     miniProjects.map((project, idx)=> {
                         return(

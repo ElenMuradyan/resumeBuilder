@@ -75,7 +75,7 @@ const EducationSection = () => {
         <>
         <Title>Add your Education Details</Title>
         <div>
-            <Form form={form} onFinish={handleData} onValuesChange={handleFieldChange}>
+            <Form form={form} onFinish={handleData} onValuesChange={handleFieldChange} vertical>
                 {
                     educationSection.map((education, idx)=> {                        
                         return(

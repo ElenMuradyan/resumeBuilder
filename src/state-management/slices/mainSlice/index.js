@@ -1,7 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    current: 0
+    current: 0,
+    pages: {
+        ProfileSection: {
+            idx: 0,
+            saved: false
+        },
+        EducationSection: {
+            idx: 1,
+            saved: false
+        },
+        MiniProjectSection: {
+            idx: 2,
+            saved: false
+        },
+        SocialSection: {
+            idx: 3,
+            saved: false
+        },
+        SkillsSection: {
+            idx: 4,
+            saved: false
+        }
+    }
 }
 
 const mainSlice = createSlice({
@@ -24,7 +46,13 @@ const mainSlice = createSlice({
         },
         setCurrent: (state, action) => {
             state.current = action.payload;
-        }
+        },
+        setSavedToTrue: (state, action) => {
+            state.pages[action.payload].true = true;
+        },
+        setSavedToFalse: (state, action) => {
+            state.pages[action.payload].true = false;
+        },
     }
 })
 

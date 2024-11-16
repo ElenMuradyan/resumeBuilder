@@ -26,14 +26,7 @@ const ProfileSection = () => {
                 imgUrl: imgUrl,
                 ...values
             };
-    
             dispatch(setProfileSection(valuesdata));
-    
-            try {
-                await saveProfileToFirestore(uid, resumeId, 'profileSection' ,valuesdata);
-            } catch (error) {
-                console.error('Error saving profile to Firestore:', error);
-            }
         }else{
             notification.error({
                 message: 'Upload your photo!'

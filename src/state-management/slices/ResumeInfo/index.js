@@ -7,14 +7,11 @@ export const education = {
     percentage:''
 };
 
-const skill = '';
-
 export const miniProject = {
     name: '',
     techStack: '',
     description: '',
 };
-const socialLink = '';
 
 const initialState = {
     resumeData: {
@@ -26,9 +23,9 @@ const initialState = {
             imgUrl: ''
         },
         educationSection: [education],
-        skillsSection: [skill],
+        skillsSection: [],
         miniProjects: [miniProject],
-        socialSection: [socialLink]
+        socialSection: []
     },
     resumeId: '1234567890',
 };
@@ -49,23 +46,17 @@ const resumeInfoSlice = createSlice({
         setEducationSection: (state, action) => {
             state.resumeData.educationSection = action.payload;
         },
-        addEducation: state => {
-            state.resumeData.educationSection.push(education);
-        },
-        deleteEducation: state => {
-            state.resumeData.educationSection.pop();
-        },
-        addMiniProject: state => {
-            state.resumeData.miniProjects.push(miniProject);
-        },
-        deleteMiniProject: state => {
-            state.resumeData.miniProjects.slice(0, state.resumeData.miniProjects.length-1);
-        },
         setMiniProjectSection: (state, action) => {
             state.resumeData.miniProjects = action.payload;
+        },
+        setSkillsSection: (state, action) => {
+            state.resumeData.skillsSection = action.payload;
+        },
+        setSocialSection: (state, action) => {
+            state.resumeData.socialSection = action.payload;
         },
     },
 })
 
 export default resumeInfoSlice.reducer;
-export const { setProfileSection, setResumeId, setImgUrl, setEducationSection, addEducation, deleteEducation, addMiniProject, deleteMiniProject, setMiniProjectSection } = resumeInfoSlice.actions;
+export const { setProfileSection, setResumeId, setImgUrl, setEducationSection, setMiniProjectSection, setSkillsSection, setSocialSection } = resumeInfoSlice.actions;

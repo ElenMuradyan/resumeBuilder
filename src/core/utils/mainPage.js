@@ -1,5 +1,5 @@
 import EducationSection from "../../components/sheard/MainComponents/EducationSection";
-// import MiniProjectSection from "../../components/sheard/MainComponents/MiniProjects";
+import MiniProjectSection from "../../components/sheard/MainComponents/MiniProjects";
 import ProfileSection from "../../components/sheard/MainComponents/ProfileSection";
 
 export const items = [
@@ -16,7 +16,7 @@ export const items = [
       {
         key: '2',
         label: 'Tab 3',
-        children:'content',
+        children: <MiniProjectSection/>,
       },
       {
         key: '3',

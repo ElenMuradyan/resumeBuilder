@@ -10,6 +10,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { setImgUrl } from "../../../../state-management/slices/ResumeInfo";
 import { doc, updateDoc } from "firebase/firestore";
 import ImgUpload from "../../ImgUpload";
+import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/slices/mainSlice";
 
 const { Title } = Typography;
 const ProfileSection = () => {
@@ -18,10 +19,12 @@ const ProfileSection = () => {
     const [ form ] = Form.useForm();
     const { resumeData: { profileSection, profileSection: {imgUrl} }, resumeId } = useSelector(store => store.resumeInfo);
     const { userData: { uid } } = useSelector(store => store.userProfile.userProfileInfo);
+    const { pages } = useSelector(state => state.main);
     const dispatch = useDispatch();
 
     const handleData = async values => {
         if(imgUrl){
+            dispatch(setSavedToTrue('ProfileSection'));
             const valuesdata = {
                 imgUrl: imgUrl,
                 ...values
@@ -81,12 +84,23 @@ const ProfileSection = () => {
 
     const handleDelete = () => {
         dispatch(setImgUrl(''));
+        dispatch(setSavedToFalse('ProfileSection'));
+        notification.error({
+            message: 'Upload your photo!'
+        })
     }
+
+    const handleChange = () => {
+        if(pages.ProfileSection.saved === true){
+            dispatch(setSavedToFalse('ProfileSection'));
+        };
+    };
 
     return(
         <>
         <Title>Add your profile details</Title>
         <Form 
+        onFieldsChange={handleChange}
         form={form}
         onFinish={handleData}
         initialValues={profileSection}
@@ -158,7 +172,7 @@ const ProfileSection = () => {
                 handleDelete={handleDelete}
                 />
             </Form.Item>
-            <Button type='primary' htmlType='submit'>Save and continue</Button>
+            <Button type='primary' htmlType='submit'>Save</Button>
             <Title level={5} style={{color:'rgba(0, 136, 255, 0.487)', margin:0}}>If you have made changes don't forget to save them</Title>
             </Form>
         </>

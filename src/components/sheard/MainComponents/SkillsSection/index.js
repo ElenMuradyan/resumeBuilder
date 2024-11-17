@@ -1,12 +1,14 @@
-import { Select, Typography, Button } from "antd";
+import { Select, Typography, Button, notification } from "antd";
 import { skills } from "../../../../core/utils/mainPage";
 import { useSelector, useDispatch } from "react-redux";
 import { setSkillsSection } from "../../../../state-management/slices/ResumeInfo";
+import { setCurrent } from "../../../../state-management/slices/mainSlice";
 
 const { Title } = Typography;
 
 const SkillsSection = () => {
     const { skillsSection } = useSelector(store => store.resumeInfo.resumeData);
+    const { pages } = useSelector(state => state.main);
     const dispatch = useDispatch();
 
     const options = skills.map((skill, idx) => ({
@@ -20,8 +22,18 @@ const SkillsSection = () => {
         console.log(skillsSection);
     };
 
-    const createResume = (value) => {
+    const createResume = () => {
+        const unsaved = [];
+        console.log(pages);
         
+        for(let key in pages){
+            let item = pages[key];
+            !item.saved && unsaved.push(item.idx);
+        }
+        unsaved[0] && dispatch(setCurrent(unsaved[0]))
+        notification.error({
+            message: 'I see you forgot to save the changes you made!'
+        })
     }
     return(
         <>

@@ -48,13 +48,13 @@ const mainSlice = createSlice({
             state.current = action.payload;
         },
         setSavedToTrue: (state, action) => {
-            state.pages[action.payload].true = true;
+            state.pages[action.payload].saved = true;
         },
         setSavedToFalse: (state, action) => {
-            state.pages[action.payload].true = false;
+            state.pages[action.payload].saved = false;
         },
     }
 })
 
 export default mainSlice.reducer;
-export const { decrementCurrent, incrementCurrent, setCurrent } = mainSlice.actions;
+export const { decrementCurrent, incrementCurrent, setCurrent, setSavedToTrue, setSavedToFalse } = mainSlice.actions;

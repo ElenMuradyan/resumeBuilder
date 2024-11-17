@@ -3,16 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { setMiniProjectSection } from "../../../../state-management/slices/ResumeInfo";
 import { saveProfileToFirestore } from "../../../../core/functions/createResume";
 import { miniProject } from "../../../../state-management/slices/ResumeInfo";
+import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/slices/mainSlice";
+
 const { Title } = Typography;
 
 const MiniProjectSection = () => {
     const [ form ] = Form.useForm();
     const dispatch = useDispatch();
-    const { resumeId } = useSelector(store => store.resumeInfo);
-    const { userData: { uid } } = useSelector(store => store.userProfile.userProfileInfo);
     const { miniProjects } = useSelector(store => store.resumeInfo.resumeData);
+    const { pages } = useSelector(state => state.main);
 
     const handleData = async values => {
+        dispatch(setSavedToTrue('MiniProjectSection'));
         const keys = Object.keys(values);
         let valueData = [];
         for( let i = 0; i<keys.length/3; i++){
@@ -24,11 +26,6 @@ const MiniProjectSection = () => {
             valueData.push(data);
         }
             dispatch(setMiniProjectSection(valueData));
-            try {
-                await saveProfileToFirestore(uid, resumeId, 'miniProjectSection' ,miniProjects);
-            } catch (error) {
-                console.error('Error saving profile to Firestore:', error);
-            }
         };
 
     const handleAddProject = () => {
@@ -54,6 +51,9 @@ const MiniProjectSection = () => {
     };
     
     const handleFieldChange = (_, allvalues) => {
+        if(pages.MiniProjectSection.saved === true){
+            dispatch(setSavedToFalse('MiniProjectSection'));
+        }
         const keys = Object.keys(allvalues);
         let valueData = [];
         for( let i = 0; i<keys.length/4; i++){

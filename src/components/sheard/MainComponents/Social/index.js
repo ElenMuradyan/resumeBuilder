@@ -1,24 +1,35 @@
 import { Form, Input, Button, Typography } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { setSocialSection } from "../../../../state-management/slices/ResumeInfo";
-
+import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/slices/mainSlice";
+import { useEffect } from "react";
 const { Title } = Typography;
 
 const SocialSection = () => {
+    const [ form ] = Form.useForm();
     const { socialSection } = useSelector(store => store.resumeInfo.resumeData);
+    const { pages } = useSelector(state => state.main);
     const dispatch = useDispatch();
 
-    const handleChange = (values) => {
+    const handleFinish = (values) => {
+        dispatch(setSavedToTrue('SocialSection'));
         dispatch(setSocialSection(values));
+    };
+
+    const onChange = () => {
+        if(pages.SocialSection.saved === true){
+            dispatch(setSavedToFalse('SocialSection'));
+        }
     };
 
     return(
         <>
             <Title>Add your Social Links</Title>
-            <Form onFinish={handleChange} initialValues={socialSection} vertical>
+            <Form form={form} onFinish={handleFinish} onFieldsChange={onChange} vertical>
                 <Form.Item
                 name='instagram'
                 label='Instagram Link'
+                initialValue={socialSection.instagram}
                 rules={[{
                     required: true,
                     message: 'Enter your Instagram link!'
@@ -29,6 +40,7 @@ const SocialSection = () => {
                 <Form.Item
                 name='facebook'
                 label='Facebook Link'
+                initialValue={socialSection.facebook}
                 rules={[{
                     required: true,
                     message: 'Enter your Facebook link!'
@@ -39,6 +51,7 @@ const SocialSection = () => {
                 <Form.Item
                 name='twitter'
                 label='Twitter Link'
+                initialValue={socialSection.twitter}
                 rules={[{
                     required: true,
                     message: 'Enter your Twitter link!'
@@ -49,6 +62,7 @@ const SocialSection = () => {
                 <Form.Item
                 name='linkedin'
                 label='LinkedIn Link'
+                initialValue={socialSection.linkedin}
                 rules={[{
                     required: true,
                     message: 'Enter your LinkedIn link!'

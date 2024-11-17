@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { setEducationSection } from "../../../../state-management/slices/ResumeInfo";
 import { saveProfileToFirestore } from "../../../../core/functions/createResume";
 import { education } from "../../../../state-management/slices/ResumeInfo";
+import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/slices/mainSlice";
 const { Title } = Typography;
 
 const EducationSection = () => {
     const [ form ] = Form.useForm();
     const dispatch = useDispatch();
-    const { resumeId } = useSelector(store => store.resumeInfo);
-    const { userData: { uid } } = useSelector(store => store.userProfile.userProfileInfo);
     const { educationSection } = useSelector(store => store.resumeInfo.resumeData);
+    const { pages } = useSelector(state => state.main);
 
     const handleData = async values => {
         const keys = Object.keys(values);
@@ -25,11 +25,8 @@ const EducationSection = () => {
             valueData.push(data);
         }
             dispatch(setEducationSection(valueData));
-            try {
-                await saveProfileToFirestore(uid, resumeId, 'educationSection' ,educationSection);
-            } catch (error) {
-                console.error('Error saving profile to Firestore:', error);
-            }
+            dispatch(setSavedToTrue('EducationSection'));
+
         };
 
         const handleAddEducation = () => {
@@ -57,6 +54,9 @@ const EducationSection = () => {
         };
 
     const handleFieldChange = (_, allvalues) => {
+        if(pages.EducationSection.saved === true){
+            dispatch(setSavedToFalse('EducationSection'));
+        };
         const keys = Object.keys(allvalues);
         let valueData = [];
         for( let i = 0; i<keys.length/4; i++){
@@ -70,7 +70,7 @@ const EducationSection = () => {
         }
             dispatch(setEducationSection(valueData));
     };
-        
+  
     return(
         <>
         <Title>Add your Education Details</Title>

@@ -12,6 +12,8 @@ import LoadingWrapper from "./components/sheard/LoadingWrapper";
 import WelcomePage from "./pages/WelcomePage";
 
 import './styles/global.css';
+import Resume from "./components/sheard/Resume";
+import ResumePage from "./pages/ResumePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +40,7 @@ function App() {
                 <Route index element={<WelcomePage/>}></Route>
                 <Route path={ROUTE_CONSTANTS.MAIN} element={<MainPage/>}/>
                 <Route path={ROUTE_CONSTANTS.WELCOMEPAGE} element={<WelcomePage/>}/>
+                <Route path={ROUTE_CONSTANTS.RESUME} element={<ResumePage/>}/>
               </Route>
             </Route>
           )

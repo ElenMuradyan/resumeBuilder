@@ -12,7 +12,8 @@ export const ROUTE_CONSTANTS={
     REGISTER:'/register',
     CABINET:'/cabinet',
     MAIN:'/cabinet/main',
-    WELCOMEPAGE: '/cabinet/start'
+    WELCOMEPAGE: '/cabinet/start',
+    RESUME: '/cabinet/resume'
 };
 
 export const STORAGE_PATH_NAMES = {

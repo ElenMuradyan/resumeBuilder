@@ -1,14 +1,17 @@
-import { Select, Typography, Button, notification } from "antd";
+import { Select, Typography, Button, notification, Space } from "antd";
 import { skills } from "../../../../core/utils/mainPage";
 import { useSelector, useDispatch } from "react-redux";
 import { setSkillsSection } from "../../../../state-management/slices/ResumeInfo";
-import { setCurrent } from "../../../../state-management/slices/mainSlice";
+import { setCurrent, setSavedToFalse, setSavedToTrue } from "../../../../state-management/slices/mainSlice";
+import { useNavigate } from "react-router-dom";
+import { ROUTE_CONSTANTS } from "../../../../core/utils/constants";
 
 const { Title } = Typography;
 
 const SkillsSection = () => {
     const { skillsSection } = useSelector(store => store.resumeInfo.resumeData);
     const { pages } = useSelector(state => state.main);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const options = skills.map((skill, idx) => ({
@@ -18,23 +21,26 @@ const SkillsSection = () => {
     }));
 
     const handleSelect = (value) => {
-        dispatch(setSkillsSection(skillsSection.concat(value.splice(-1))));
-        console.log(skillsSection);
+        dispatch(setSavedToFalse('SkillsSection'));
+        dispatch(setSkillsSection(value))
     };
 
     const createResume = () => {
         const unsaved = [];
-        console.log(pages);
         
         for(let key in pages){
             let item = pages[key];
             !item.saved && unsaved.push(item.idx);
         }
-        unsaved[0] && dispatch(setCurrent(unsaved[0]))
+        if(unsaved.length > 0){
+        dispatch(setCurrent(unsaved[0]));
         notification.error({
             message: 'I see you forgot to save the changes you made!'
-        })
-    }
+        })}else{
+            navigate(ROUTE_CONSTANTS.RESUME)
+        }      
+    };
+
     return(
         <>
             <Title>Add your Skills</Title>
@@ -47,8 +53,9 @@ const SkillsSection = () => {
                 options={options}
                 onChange={handleSelect}
             />
-            <Button onClick={() => createResume()} type='primary'>Create Your Resume</Button> 
+            <Button type='primary' onClick={() => dispatch(setSavedToTrue('SkillsSection'))}>Save</Button>
             <Title level={5} style={{color:'rgba(0, 136, 255, 0.487)', margin:0}}>If you have made changes don't forget to save them</Title>
+            <Button onClick={createResume} type='primary'>Create Your Resume</Button> 
         </>
     )
 };

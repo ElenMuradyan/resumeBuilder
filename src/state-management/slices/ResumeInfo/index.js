@@ -25,7 +25,12 @@ const initialState = {
         educationSection: [education],
         skillsSection: [],
         miniProjects: [miniProject],
-        socialSection: []
+        socialSection: {
+            instagram: '',
+            facebook: '',
+            twitter: '',
+            linkedin: ''
+        }
     },
     resumeId: '1234567890',
 };
@@ -55,8 +60,9 @@ const resumeInfoSlice = createSlice({
         setSocialSection: (state, action) => {
             state.resumeData.socialSection = action.payload;
         },
+        resumeInfoRender: () => initialState,
     },
 })
 
 export default resumeInfoSlice.reducer;
-export const { setProfileSection, setResumeId, setImgUrl, setEducationSection, setMiniProjectSection, setSkillsSection, setSocialSection } = resumeInfoSlice.actions;
+export const { setProfileSection, setResumeId, setImgUrl, setEducationSection, setMiniProjectSection, setSkillsSection, setSocialSection, resumeInfoRender } = resumeInfoSlice.actions;

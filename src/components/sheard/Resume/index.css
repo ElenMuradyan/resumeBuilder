@@ -1,0 +1,14 @@
+.avatar_container{
+    padding: 30px;
+    width: 40%;
+    background-color: #222;
+}
+
+.avatar_text{
+    color: white;
+}
+
+.avatar_link{
+    color: rgba(255, 255, 255, 0.636);
+    text-decoration: none;
+}

@@ -4,7 +4,8 @@ import { ROUTE_CONSTANTS } from "../../core/utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { createResume } from '../../core/functions/createResume';
 import { setResumeId } from "../../state-management/slices/ResumeInfo";
-
+import { resumeInfoRender } from "../../state-management/slices/ResumeInfo";
+import { mainRender } from "../../state-management/slices/mainSlice";
 const { Text } = Typography;
 
 const WelcomePage = () => {
@@ -14,8 +15,9 @@ const WelcomePage = () => {
 
     const handleStart = async () => {
         // dispatch(setResumeId());
-        console.log(resumeId)
         try{
+            dispatch(resumeInfoRender());
+            dispatch(mainRender());
             await createResume(userData.uid, resumeId, resumeData);
         }catch(e){
             console.log(e);

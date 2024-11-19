@@ -31,16 +31,12 @@ const mainSlice = createSlice({
     initialState,
     reducers: {
         incrementCurrent: (state) => {
-            if (state.current === 4 ) {
-                state.current = 0;
-            }else{
+            if (state.current < 4 ) {
                 state.current++;
             }
         },
         decrementCurrent: (state) => {
-            if (state.current === 0 ) {
-                state.current = 4;
-            }else{
+            if (state.current > 0 ) {
                 state.current--;
             }
         },
@@ -53,8 +49,9 @@ const mainSlice = createSlice({
         setSavedToFalse: (state, action) => {
             state.pages[action.payload].saved = false;
         },
+        mainRender: () => initialState,
     }
 })
 
 export default mainSlice.reducer;
-export const { decrementCurrent, incrementCurrent, setCurrent, setSavedToTrue, setSavedToFalse } = mainSlice.actions;
+export const { decrementCurrent, incrementCurrent, setCurrent, setSavedToTrue, setSavedToFalse, mainRender } = mainSlice.actions;

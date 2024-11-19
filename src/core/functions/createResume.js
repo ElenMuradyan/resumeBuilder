@@ -3,7 +3,6 @@ import { db } from '../../services/firebase';
 import { FIRESTORE_PATH_NAMES } from "../utils/constants";
 
 export const createResume = async ( uid, resumeId, resumeData ) => {
-    console.log(uid)
     const userRef = doc(db, FIRESTORE_PATH_NAMES.REGISTER_USERS, uid);
     const resumeRef = doc(collection(userRef, FIRESTORE_PATH_NAMES.RESUMES), resumeId);
 

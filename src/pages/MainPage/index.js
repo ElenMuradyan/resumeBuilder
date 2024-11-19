@@ -17,7 +17,6 @@ const MainPage = () => {
   };
 
   const handleTabChange = (key) => {
-    console.log(key)
     dispatch(setCurrent(Number(key)));
   };
 
@@ -36,17 +35,23 @@ const MainPage = () => {
       <Tabs activeKey={String(current)} defaultActiveKey={String(current)} items={items} style={{width: '100%'}} tabBarStyle={{width: '100%', display: 'flex', justifyContent: 'space-evenly', padding: 0}} centered size='large' onChange={handleTabChange}/>
       <div style={contentStyle}>{items[current].content}</div>
       <Flex justify='space-between' gap={10} style={{width:'50%'}}>
-      <Button type="primary" onClick={() => next()}>
-            Next
-      </Button>
-          <Button
+      <Button
             style={{
               margin: '0 8px',
             }}
+            type="primary"
+            disabled={current===0}
             onClick={() => prev()}
           >
             Previous
           </Button>
+      <Button 
+      type="primary"
+      onClick={() => next()}
+      disabled={current===4}
+      >
+            Next
+      </Button>
       </Flex>
     </Flex>
   );

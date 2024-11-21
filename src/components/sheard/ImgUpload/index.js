@@ -1,4 +1,4 @@
-import { Upload, Avatar, Progress, Button, Flex } from "antd";
+import { Upload, Progress, Flex } from "antd";
 import { PlusOutlined } from '@ant-design/icons';
 import { useSelector } from "react-redux";
 

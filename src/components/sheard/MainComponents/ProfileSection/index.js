@@ -2,7 +2,6 @@ import { Form, Input, Typography, Flex, Col, Button, message, notification, them
 import { PhoneNumberValidation } from "../../../../core/utils/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { setProfileSection } from "../../../../state-management/slices/ResumeInfo";
-import { saveProfileToFirestore } from "../../../../core/functions/createResume";
 import { useState } from 'react';
 import { storage, db } from "../../../../services/firebase";
 import { STORAGE_PATH_NAMES,FIRESTORE_PATH_NAMES } from "../../../../core/utils/constants";
@@ -106,7 +105,7 @@ const ProfileSection = () => {
     };
 
     return(
-        <Flex align="center" justify="center" vertical style={{width: '100%', height: '50vh' }}>
+        <Flex align="center" justify="center" vertical style={{width: '100%', padding: 10 }}>
         <Title style={{color: token.blue}}>Add your profile details</Title>
         <Form 
         onFieldsChange={handleChange}
@@ -193,6 +192,17 @@ const ProfileSection = () => {
                 handleDelete={handleDelete}
                 />
             </Form.Item>
+                    <Form.Item
+                label='Description for resume'
+                className="formItem"
+                name='description'
+                rules={[{
+                    required: true,
+                    message: 'Please enter your first name'
+                }]}
+                >
+                    <Input className="Input" placeholder="Description" type='text'></Input>
+                </Form.Item>
             <Button size="large" type='primary' htmlType='submit'>Save</Button>
             <Title level={4} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
             </Form>

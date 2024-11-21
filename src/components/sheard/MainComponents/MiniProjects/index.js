@@ -1,7 +1,6 @@
 import { Typography, Form, Input, Button, theme, notification } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { setMiniProjectSection } from "../../../../state-management/slices/ResumeInfo";
-import { saveProfileToFirestore } from "../../../../core/functions/createResume";
 import { miniProject } from "../../../../state-management/slices/ResumeInfo";
 import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/slices/mainSlice";
 

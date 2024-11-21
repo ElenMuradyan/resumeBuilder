@@ -42,6 +42,11 @@ const DropDown = () => {
             label: 'Logout',
             key:'logout',
             onClick:handleSignOut,
+        },
+        {
+            label: 'Home',
+            key:'1',
+            onClick:() => navigate(ROUTE_CONSTANTS.WELCOMEPAGE),
         }
     ]
     return (

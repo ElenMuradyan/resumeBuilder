@@ -2,7 +2,7 @@ import { Form, Input, Button, Typography, theme, notification } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { setSocialSection } from "../../../../state-management/slices/ResumeInfo";
 import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/slices/mainSlice";
-import { useEffect } from "react";
+
 const { Title } = Typography;
 
 const SocialSection = () => {

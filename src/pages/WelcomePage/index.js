@@ -12,7 +12,7 @@ const { Title } = Typography;
 
 const WelcomePage = () => {
     const { userProfileInfo: { userData } } = useSelector(store => store.userProfile);
-    const { resumeData, resumeId } = useSelector(store => store.resumeInfo);
+    const { resumeData } = useSelector(store => store.resumeInfo);
     const dispatch = useDispatch();
 
     const handleStart = async () => {

@@ -1,7 +1,6 @@
-import { Typography, Form, Input, Button, theme, Flex, notification } from "antd";
+import { Typography, Form, Input, Button, theme, notification } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { setEducationSection } from "../../../../state-management/slices/ResumeInfo";
-import { saveProfileToFirestore } from "../../../../core/functions/createResume";
 import { education } from "../../../../state-management/slices/ResumeInfo";
 import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/slices/mainSlice";
 const { Title } = Typography;

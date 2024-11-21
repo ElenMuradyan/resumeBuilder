@@ -32,7 +32,7 @@ const MainPage = () => {
     marginTop: 16,
   };
   return (
-    <Flex align='center' vertical style={{width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.739)'}}>
+    <Flex align='center' vertical style={{width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.739)', marginTop:200}}>
     <Title style={{color:token.blue}}>Create Your Resume</Title>
    <Flex align='center' gap={10} vertical style={{padding:'10px', width: '100%'}}>
       <Tabs 

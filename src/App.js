@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchUserProfileInfo());
-  },[]);
+  },[dispatch]);
 
   return (
     <LoadingWrapper>
@@ -42,6 +42,7 @@ function App() {
                 <Route path={ROUTE_CONSTANTS.WELCOMEPAGE} element={<WelcomePage />}/>
                 <Route path={ROUTE_CONSTANTS.RESUME} element={<ResumePage />}/>
                 <Route path={ROUTE_CONSTANTS.RESUMES} element={<ResumesPage />}/>
+                <Route path={ROUTE_CONSTANTS.CREATED_RESUME} element={<ResumePage/>}/>
               </Route>
             </Route>
           )
@@ -49,7 +50,7 @@ function App() {
       }
       />
     </LoadingWrapper>
-  );
+  )
 }
 
 export default App;

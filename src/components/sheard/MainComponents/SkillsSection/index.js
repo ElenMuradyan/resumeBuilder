@@ -1,17 +1,18 @@
-import { Select, Typography, Button, notification, Space, theme } from "antd";
+import { Select, Typography, Button, notification, theme } from "antd";
 import { skills } from "../../../../core/utils/mainPage";
 import { useSelector, useDispatch } from "react-redux";
 import { setCreated, setSkillsSection } from "../../../../state-management/slices/ResumeInfo";
 import { setCurrent, setSavedToFalse, setSavedToTrue } from "../../../../state-management/slices/mainSlice";
 import { useNavigate } from "react-router-dom";
-import { ROUTE_CONSTANTS } from "../../../../core/utils/constants";
 import { setLoading } from "../../../../state-management/slices/userProfile";
 import { addResumeDetails } from "../../../../core/functions/createResume";
 const { Title } = Typography;
 
 const SkillsSection = () => {
     const { token } = theme.useToken();
+    const { userProfileInfo: { userData: { uid } } } = useSelector(store => store.userProfile);
     const { skillsSection } = useSelector(store => store.resumeInfo.resumeData);
+    const { resumeId, resumeData } = useSelector(store => store.resumeInfo);
     const { pages } = useSelector(state => state.main);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const SkillsSection = () => {
         });
         dispatch(setSavedToTrue('SkillsSection'));
     }
+
     const createResume = () => {
         const unsaved = [];
         
@@ -45,10 +47,11 @@ const SkillsSection = () => {
         notification.error({
             message: 'I see you forgot to save the changes you made!'
         })}else{
+            addResumeDetails(uid, resumeId, resumeData);
             dispatch(setCreated());
-            navigate(ROUTE_CONSTANTS.RESUME);
+            navigate(`resume/${resumeId}`);
             dispatch(setLoading(true));
-            setTimeout(()=>dispatch(setLoading(false)), 3000);
+            setTimeout(() => dispatch(setLoading(false)), 3000);
         }      
     };
 

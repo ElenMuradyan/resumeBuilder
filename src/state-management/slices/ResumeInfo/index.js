@@ -20,7 +20,8 @@ const initialState = {
             lastName: '',
             phoneNumber: '',
             adress: '',
-            imgUrl: ''
+            imgUrl: '',
+            description: ''
         },
         educationSection: [education],
         skillsSection: [],

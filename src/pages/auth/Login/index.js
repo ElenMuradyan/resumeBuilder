@@ -17,7 +17,7 @@ const Login = () => {
 
     useEffect(() => {
         navigate(ROUTE_CONSTANTS.LOGIN);
-    },[]);
+    },[navigate]);
 
     const handleLogin = async values => {
         try{

@@ -10,8 +10,9 @@ import './index.css'
 
 const { Title, Text, Link } = Typography;
 
-const Resume = ({data}) => {
+const Resume = ({ data }) => {
     const resumeRef = useRef();
+    const { userProfileInfo: { userData: { email } } } = useSelector(store => store.userProfile);
 
     const downloadResumeAsPDF = () => {
         html2canvas(resumeRef.current, { useCORS: true }).then((canvas) => {
@@ -22,8 +23,6 @@ const Resume = ({data}) => {
         })
     };
 
-    const { userProfileInfo: { userData: {email} } } = useSelector(store => store.userProfile);
-    console.log(data)
     const {
             profileSection: {
                 firstName,
@@ -43,8 +42,8 @@ const Resume = ({data}) => {
             }
     } = data;
 
-    console.log(imgUrl)
-    const proxyUrl = `http://localhost:5000/proxy?url=${encodeURIComponent(imgUrl)}`;
+console.log(data)
+const proxyUrl = `https://<your-netlify-site>.netlify.app/api/proxy?url=${encodeURIComponent(imgUrl)}`;
 
     return(
         <>

@@ -13,7 +13,8 @@ export const ROUTE_CONSTANTS={
     CABINET:'/cabinet',
     MAIN:'/cabinet/main',
     WELCOMEPAGE: '/cabinet/start',
-    RESUME: '/cabinet/resume'
+    RESUME: '/cabinet/resume',
+    RESUMES: '/cabinet/resumes'
 };
 
 export const STORAGE_PATH_NAMES = {

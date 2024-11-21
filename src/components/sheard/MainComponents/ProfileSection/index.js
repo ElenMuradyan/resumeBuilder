@@ -1,4 +1,4 @@
-import { Form, Input, Typography, Flex, Col, Button, message, notification } from "antd";
+import { Form, Input, Typography, Flex, Col, Button, message, notification, theme } from "antd";
 import { PhoneNumberValidation } from "../../../../core/utils/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { setProfileSection } from "../../../../state-management/slices/ResumeInfo";
@@ -14,6 +14,7 @@ import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/sl
 
 const { Title } = Typography;
 const ProfileSection = () => {
+    const { token } = theme.useToken()
     const [ uploading, setUploading ] = useState(false);
     const [ progress, setProgress ] = useState(0);
     const [ form ] = Form.useForm();
@@ -97,42 +98,50 @@ const ProfileSection = () => {
     };
 
     return(
-        <>
-        <Title>Add your profile details</Title>
+        <Flex align="center" justify="center" vertical style={{width: '100%', height: '50vh' }}>
+        <Title style={{color: token.blue}}>Add your profile details</Title>
         <Form 
         onFieldsChange={handleChange}
         form={form}
         onFinish={handleData}
         initialValues={profileSection}
-        style={{width: '100%', padding: '3%'}}> 
+        style={{width: '100%', padding: '3%'}}
+        layout="vertical"
+        > 
             <Flex justify='space-between'>
                 <Col style={{width: '48%'}}>
                     <Form.Item
+                label='First Name'
+                className="formItem"
                 name='firstName'
                 rules={[{
                     required: true,
                     message: 'Please enter your first name'
                 }]}
                 >
-                    <Input placeholder="First Name" type='text'></Input>
+                    <Input className="Input" placeholder="First Name" type='text'></Input>
                 </Form.Item>
                 </Col>
 
                 <Col style={{width: '48%'}}>
                     <Form.Item
+                label='Last Name'
+                className="formItem"
                 name='lastName'
                 rules={[{
                     required: true,
                     message: 'Please enter your last name'
                 }]}
                 >
-                    <Input placeholder="Last Name" type='text'></Input>
+                    <Input className="Input" placeholder="Last Name" type='text'></Input>
                 </Form.Item>
                 </Col>
             </Flex>
             <Flex justify='space-between'>
             <Col style={{width: '48%'}}>
             <Form.Item
+              label='Phone Number'
+                className="formItem"
                 name='phoneNumber'
                 rules={[{
                     required: true,
@@ -143,23 +152,27 @@ const ProfileSection = () => {
                 }
                 ]}
                 >
-                    <Input placeholder="Phone Number" type='text'></Input>
+                    <Input className="Input" placeholder="Phone Number" type='text'></Input>
                 </Form.Item>
                 </Col>
 
                 <Col style={{width: '48%'}}>
                     <Form.Item
+                      label='Adress'
+                className="formItem"
                 name='adress'
                 rules={[{
                     required: true,
                     message: 'Please enter your adress'
                 }]}
                 >
-                    <Input placeholder="Adress" type='text'></Input>
+                    <Input className="Input" placeholder="Adress" type='text'></Input>
                 </Form.Item>
                 </Col>
             </Flex>
             <Form.Item
+              label='Upload Your Photo'
+                className="formItem"
             rules={[{
                 required: true,
                 message: 'Upload your photo'
@@ -172,10 +185,10 @@ const ProfileSection = () => {
                 handleDelete={handleDelete}
                 />
             </Form.Item>
-            <Button type='primary' htmlType='submit'>Save</Button>
-            <Title level={5} style={{color:'rgba(0, 136, 255, 0.487)', margin:0}}>If you have made changes don't forget to save them</Title>
+            <Button size="large" type='primary' htmlType='submit'>Save</Button>
+            <Title level={4} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
             </Form>
-        </>
+        </Flex>
     )
 }
 

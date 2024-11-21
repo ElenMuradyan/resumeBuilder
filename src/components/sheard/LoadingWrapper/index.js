@@ -5,9 +5,10 @@ const LoadingWrapper = ({ children }) => {
 
     return (<>
         {loading ?
-         <Flex style={{width:'100%', height:'100vh'}} justify='center' align='center' vertical>
+         <Flex style={{width:'100%', height:'100vh', backgroundColor: 'rgba(0, 0, 0, 0.3)'}} justify='center' align='center' vertical>
             <Spin
             size='large'
+            tip="Please wait..."
             /> 
          </Flex>
         : children}

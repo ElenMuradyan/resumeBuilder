@@ -44,6 +44,9 @@ const userProfileSlice = createSlice({
         setIsAuth: (state, action) => {
             state.userProfileInfo.isAuth = action.payload;
         },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
+        },
     },
     extraReducers: promise => {
         promise
@@ -65,4 +68,4 @@ const userProfileSlice = createSlice({
 })
 
 export default userProfileSlice.reducer;
-export const { setIsAuth } = userProfileSlice.actions;
+export const { setIsAuth, setLoading } = userProfileSlice.actions;

@@ -1,4 +1,4 @@
-import { Typography, Form, Input, Button } from "antd";
+import { Typography, Form, Input, Button, theme } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { setMiniProjectSection } from "../../../../state-management/slices/ResumeInfo";
 import { saveProfileToFirestore } from "../../../../core/functions/createResume";
@@ -8,6 +8,7 @@ import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/sl
 const { Title } = Typography;
 
 const MiniProjectSection = () => {
+    const { token } = theme.useToken();
     const [ form ] = Form.useForm();
     const dispatch = useDispatch();
     const { miniProjects } = useSelector(store => store.resumeInfo.resumeData);
@@ -69,14 +70,15 @@ const MiniProjectSection = () => {
 
     return(
         <>
-        <Title>Add your Mini Projects</Title>
+        <Title style={{color: token.blue, textAlign: 'center'}}>Add your Mini Projects</Title>
         <div>
-            <Form form={form} onFinish={handleData} onValuesChange={handleFieldChange} vertical>
+            <Form form={form} onFinish={handleData} onValuesChange={handleFieldChange} layout="vertical" style={{padding: '3%'}}>
                 {
                     miniProjects.map((project, idx)=> {
                         return(
                             <div key={idx}>
                              <Form.Item
+                             className="formItem"
                             label='Project Name'
                             name={`name${idx}`}
                             initialValue={project.name}
@@ -85,9 +87,10 @@ const MiniProjectSection = () => {
                                 message: 'Enter Project Name!'
                             }]}
                             >
-                                <Input placeholder="Project Name" type="text"/>
+                                <Input className="Input" placeholder="Project Name" type="text"/>
                             </Form.Item>
                             <Form.Item
+                            className="formItem"
                             label='Tech Stack'
                             name={`techStack${idx}`}
                             initialValue={project.techStack}
@@ -96,9 +99,10 @@ const MiniProjectSection = () => {
                                 message: 'Enter the Tech Stack!'
                             }]}
                             >
-                                <Input placeholder="Tech Stack" type="text"/>
+                                <Input className="Input" placeholder="Tech Stack" type="text"/>
                             </Form.Item>
                                 <Form.Item
+                                className="formItem"
                             label='Description'
                             name={`description${idx}`}
                             initialValue={project.description}
@@ -107,16 +111,17 @@ const MiniProjectSection = () => {
                                 message: 'Enter the Description!'
                             }]}
                             >
-                                <Input placeholder="Description" type="text"/>
+                                <Input className="Input" placeholder="Description" type="text"/>
                                 </Form.Item>
                             </div>
                         )
                     })
                  } 
-                  <Button onClick={handleAddProject}>Add Project</Button>
-                  <Button disabled={miniProjects.length === 1} onClick={handleDeleteProject}>Delete Project</Button><br/>
-                <Button htmlType='submit' type='primary'>Save</Button>
-                <Title level={5} style={{color:'rgba(0, 136, 255, 0.487)', margin:0}}>If you have made changes don't forget to save them</Title>
+                  <Button type="primary"  style={{margin: 10}} size="large" onClick={handleAddProject}>Add Project</Button>
+                  <Button type="primary" size="large" disabled={miniProjects.length === 1} onClick={handleDeleteProject}>Delete Project</Button>
+                  <br/><br/>
+                <Button type="primary" size="large" htmlType='submit'>Save</Button>
+                <Title level={3} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
             </Form>
         </div>
         </>

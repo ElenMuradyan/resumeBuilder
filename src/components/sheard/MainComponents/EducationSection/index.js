@@ -1,4 +1,4 @@
-import { Typography, Form, Input, Button } from "antd";
+import { Typography, Form, Input, Button, theme, Flex } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { setEducationSection } from "../../../../state-management/slices/ResumeInfo";
 import { saveProfileToFirestore } from "../../../../core/functions/createResume";
@@ -7,6 +7,7 @@ import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/sl
 const { Title } = Typography;
 
 const EducationSection = () => {
+    const { token } = theme.useToken();
     const [ form ] = Form.useForm();
     const dispatch = useDispatch();
     const { educationSection } = useSelector(store => store.resumeInfo.resumeData);
@@ -73,14 +74,20 @@ const EducationSection = () => {
   
     return(
         <>
-        <Title>Add your Education Details</Title>
+        <Title style={{color: token.blue, textAlign: 'center'}}>Add your Education Details</Title>
         <div>
-            <Form form={form} onFinish={handleData} onValuesChange={handleFieldChange} vertical>
+            <Form form={form} 
+            onFinish={handleData} 
+            onValuesChange={handleFieldChange} 
+            layout="vertical" 
+            style={{width: '100%', padding: '3%'}}
+            >
                 {
                     educationSection.map((education, idx)=> {                        
                         return(
                             <div key={idx}>
                              <Form.Item
+                             className="formItem"
                             label='Course Name'
                             name={`courseName${idx}`}
                             initialValue={education.courseName}
@@ -89,9 +96,10 @@ const EducationSection = () => {
                                 message: 'Enter Course Name!'
                             }]}
                             >
-                                <Input placeholder="Course Name" type="text"/>
+                                <Input className="Input" placeholder="Course Name" type="text"/>
                             </Form.Item>
                             <Form.Item
+                            className="formItem"
                             label='Completition Year'
                             name={`completitionYear${idx}`}
                             initialValue={Number(education.completitionYear)}
@@ -100,9 +108,10 @@ const EducationSection = () => {
                                 message: 'Enter the Completition Year!'
                             }]}
                             >
-                                <Input placeholder="Completition Year" type="number"/>
+                                <Input className="Input" placeholder="Completition Year" type="number"/>
                             </Form.Item>
                                 <Form.Item
+                                className="formItem"
                             label='College/School'
                             name={`collegeSchool${idx}`}
                             initialValue={education.collegeSchool}
@@ -111,9 +120,10 @@ const EducationSection = () => {
                                 message: 'Enter the College or School!'
                             }]}
                             >
-                                <Input placeholder="College/School" type="text"/>
+                                <Input className="Input" placeholder="College/School" type="text"/>
                             </Form.Item>
                                 <Form.Item
+                                className="formItem"
                                 label='Percentage'
                                 name={`percentage${idx}`}
                                 initialValue={education.percentage}
@@ -122,16 +132,17 @@ const EducationSection = () => {
                                     message: 'Enter the Percentage!'
                                 }]}
                                 >
-                                    <Input placeholder="Percentage" type="text"/>
+                                    <Input className="Input" placeholder="Percentage" type="text"/>
                                 </Form.Item>
                             </div>
                         )
                     })
                  } 
-                  <Button onClick={handleAddEducation}>Add Education</Button>
-                  <Button disabled={educationSection.length === 1} onClick={handleDeleteEducation}>Delete Education</Button><br/>
-                <Button htmlType='submit' type='primary'>Save</Button>
-                <Title level={5} style={{color:'rgba(0, 136, 255, 0.487)', margin:0}}>If you have made changes don't forget to save them</Title>
+                  <Button size="large" type='primary' style={{margin: 10}} onClick={handleAddEducation}>Add Education</Button>
+                  <Button size="large" type='primary' disabled={educationSection.length === 1} onClick={handleDeleteEducation}>Delete Education</Button>
+                  <br/><br/>
+                <Button size="large" htmlType='submit' type='primary'>Save</Button>
+                <Title level={3} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
             </Form>
         </div>
         </>

@@ -5,6 +5,7 @@ import { auth, db } from "../../../services/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Wrapper from "../../../components/sheard/AuthWrapper";
 
 const { Title } = Typography;
 
@@ -32,8 +33,10 @@ const Register = () => {
     };
 
     return(
+        <Wrapper title='Sign up' height='100vh'>
         <Form form={form} layout="vertical" onFinish={handleRegister}>
             <Form.Item
+            className="formItem"
             label='First Name'
             name='firstName'
             rules={[{
@@ -41,9 +44,10 @@ const Register = () => {
                 message: 'Enter your first name!'
             }]}
             >
-                <Input placeholder="First Name" type="text"/>
+                <Input className="Input" placeholder="First Name" type="text"/>
             </Form.Item>
             <Form.Item
+            className="formItem"
             label='Last Name'
             name='lastName'
             rules={[{
@@ -51,9 +55,10 @@ const Register = () => {
                 message: 'Enter your last name!'
             }]}
             >
-                <Input placeholder="Last Name" type="text"/>
+                <Input className="Input" placeholder="Last Name" type="text"/>
             </Form.Item>
             <Form.Item
+            className="formItem"
             label='Email'
             name='email'
             rules={[{
@@ -61,9 +66,10 @@ const Register = () => {
                 message: 'Enter your email!'
             }]}
             >
-                <Input placeholder="Email" type="text"/>
+                <Input className="Input" placeholder="Email" type="text"/>
             </Form.Item>
             <Form.Item
+            className="formItem"
             label='Password'
             name='password'
             tooltip={'The password must contain at least 6 to 16 characters, including at least one digit and one special character (e.g., !, @, #, $, %, ^, &, *).'}
@@ -77,12 +83,13 @@ const Register = () => {
             }
             ]}
             >
-                <Input.Password placeholder="Password" type="text"/>
+                <Input.Password className="Input" placeholder="Password" type="text"/>
             </Form.Item>
-            <Button htmlType="submit">Sign up</Button>
-            <Title level={4}>Already have an account?</Title>
+            <Button htmlType="submit" type='primary'>Sign up</Button>
+            <Title style={{color: 'rgba(0, 60, 255, 0.64)'}} level={4}>Already have an account?</Title>
             <Link to={ROUTE_CONSTANTS.LOGIN}>Sign in</Link>  
         </Form>
+        </Wrapper>
     )
 }
 

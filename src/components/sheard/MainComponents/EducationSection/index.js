@@ -1,4 +1,4 @@
-import { Typography, Form, Input, Button, theme, Flex } from "antd";
+import { Typography, Form, Input, Button, theme, Flex, notification } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { setEducationSection } from "../../../../state-management/slices/ResumeInfo";
 import { saveProfileToFirestore } from "../../../../core/functions/createResume";
@@ -25,6 +25,9 @@ const EducationSection = () => {
             }
             valueData.push(data);
         }
+        notification.success({
+            message: 'Data sent successfully:)',
+        })
             dispatch(setEducationSection(valueData));
             dispatch(setSavedToTrue('EducationSection'));
 

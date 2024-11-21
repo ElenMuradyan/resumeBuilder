@@ -30,9 +30,10 @@ const initialState = {
             facebook: '',
             twitter: '',
             linkedin: ''
-        }
+        },
+        created: false
     },
-    resumeId: '1234567890',
+    resumeId: '',
 };
 
 const resumeInfoSlice = createSlice({
@@ -42,8 +43,11 @@ const resumeInfoSlice = createSlice({
         setProfileSection: (state, action) => {
             state.resumeData.profileSection = action.payload;
         },
-        setResumeId: (state) => {
-            // state.resumeId = new Date().getTime().toString();
+        setResumeId: (state, action) => {
+            state.resumeId = action.payload;
+        },
+        setCreated: (state) => {
+            state.resumeData.created = true;
         },
         setImgUrl: (state, action) => {
             state.resumeData.profileSection.imgUrl = action.payload;
@@ -65,4 +69,4 @@ const resumeInfoSlice = createSlice({
 })
 
 export default resumeInfoSlice.reducer;
-export const { setProfileSection, setResumeId, setImgUrl, setEducationSection, setMiniProjectSection, setSkillsSection, setSocialSection, resumeInfoRender } = resumeInfoSlice.actions;
+export const { setProfileSection, setResumeId, setImgUrl, setEducationSection, setMiniProjectSection, setSkillsSection, setSocialSection, resumeInfoRender, setCreated } = resumeInfoSlice.actions;

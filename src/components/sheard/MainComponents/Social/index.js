@@ -1,4 +1,4 @@
-import { Form, Input, Button, Typography, theme } from "antd";
+import { Form, Input, Button, Typography, theme, notification } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { setSocialSection } from "../../../../state-management/slices/ResumeInfo";
 import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/slices/mainSlice";
@@ -15,6 +15,9 @@ const SocialSection = () => {
     const handleFinish = (values) => {
         dispatch(setSavedToTrue('SocialSection'));
         dispatch(setSocialSection(values));
+        notification.success({
+            message: 'Data sent successfully:)',
+        });
     };
 
     const onChange = () => {

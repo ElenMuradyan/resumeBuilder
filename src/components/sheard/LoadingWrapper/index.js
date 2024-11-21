@@ -9,6 +9,7 @@ const LoadingWrapper = ({ children }) => {
             <Spin
             size='large'
             tip="Please wait..."
+            fullscreen
             /> 
          </Flex>
         : children}

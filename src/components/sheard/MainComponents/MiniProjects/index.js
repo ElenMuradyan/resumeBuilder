@@ -1,4 +1,4 @@
-import { Typography, Form, Input, Button, theme } from "antd";
+import { Typography, Form, Input, Button, theme, notification } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { setMiniProjectSection } from "../../../../state-management/slices/ResumeInfo";
 import { saveProfileToFirestore } from "../../../../core/functions/createResume";
@@ -26,6 +26,9 @@ const MiniProjectSection = () => {
             }
             valueData.push(data);
         }
+        notification.success({
+            message: 'Data sent successfully:)',
+        });
             dispatch(setMiniProjectSection(valueData));
         };
 

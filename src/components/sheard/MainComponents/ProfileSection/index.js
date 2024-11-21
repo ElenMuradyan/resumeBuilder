@@ -13,12 +13,14 @@ import ImgUpload from "../../ImgUpload";
 import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/slices/mainSlice";
 
 const { Title } = Typography;
+
 const ProfileSection = () => {
     const { token } = theme.useToken()
     const [ uploading, setUploading ] = useState(false);
     const [ progress, setProgress ] = useState(0);
     const [ form ] = Form.useForm();
-    const { resumeData: { profileSection, profileSection: {imgUrl} }, resumeId } = useSelector(store => store.resumeInfo);
+    const { resumeData: { profileSection, profileSection: {imgUrl} } } = useSelector(store => store.resumeInfo);
+    const { resumeId } = useSelector(state => state.resumeInfo);
     const { userData: { uid } } = useSelector(store => store.userProfile.userProfileInfo);
     const { pages } = useSelector(state => state.main);
     const dispatch = useDispatch();
@@ -31,6 +33,9 @@ const ProfileSection = () => {
                 ...values
             };
             dispatch(setProfileSection(valuesdata));
+            notification.success({
+                message: 'Data sent successfully',
+            })
         }else{
             notification.error({
                 message: 'Upload your photo!'
@@ -38,7 +43,7 @@ const ProfileSection = () => {
         }
         };
 
-        const updateUserProfileImg = async (imgUrl) => {
+        const updateUserProfileImg = async (imgUrl) => {            
             try{
                 const userRef = doc(db, FIRESTORE_PATH_NAMES.REGISTER_USERS, uid);
                 const resumeRef = doc(userRef, FIRESTORE_PATH_NAMES.RESUMES, resumeId);
@@ -48,7 +53,8 @@ const ProfileSection = () => {
                         imgUrl: imgUrl
                     }
                 })
-            }catch{
+            }catch(e){
+                console.log(e)
                 notification.error({
                     message:'Error:('
                 })
@@ -77,7 +83,9 @@ const ProfileSection = () => {
                     setProgress(0);
                     updateUserProfileImg(imgUrl);
                     dispatch(setImgUrl(imgUrl));
-                    message.success('Upload successful');
+                    notification.success({
+                        message:'Upload successfully'
+                    })
                 })
             }
         )

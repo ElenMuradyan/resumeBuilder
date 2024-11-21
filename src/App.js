@@ -11,9 +11,7 @@ import ResumesPage from "./pages/ResumesPage";
 import { ROUTE_CONSTANTS } from "./core/utils/constants";
 import LoadingWrapper from "./components/sheard/LoadingWrapper";
 import WelcomePage from "./pages/WelcomePage";
-import Resume from "./components/sheard/Resume";
 import ResumePage from "./pages/ResumePage";
-import { element } from "prop-types";
 
 import './styles/global.css';
 

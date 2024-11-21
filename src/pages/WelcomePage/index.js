@@ -7,7 +7,7 @@ import { setResumeId } from "../../state-management/slices/ResumeInfo";
 import { resumeInfoRender } from "../../state-management/slices/ResumeInfo";
 import { mainRender } from "../../state-management/slices/mainSlice";
 import Wrapper from "../../components/sheard/AuthWrapper";
-
+import { generateUid } from "../../core/functions/createResume";
 const { Title } = Typography;
 
 const WelcomePage = () => {
@@ -16,10 +16,11 @@ const WelcomePage = () => {
     const dispatch = useDispatch();
 
     const handleStart = async () => {
-        // dispatch(setResumeId());
+        const resumeId = generateUid();        
         try{
             dispatch(resumeInfoRender());
             dispatch(mainRender());
+            dispatch(setResumeId(resumeId));
             await createResume(userData.uid, resumeId, resumeData);
         }catch(e){
             console.log(e);

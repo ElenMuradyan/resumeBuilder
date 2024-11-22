@@ -5,7 +5,7 @@ import { ROUTE_CONSTANTS } from "../../../core/utils/constants";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../services/firebase";
 import { useDispatch } from "react-redux";
-import { fetchUserProfileInfo, setIsAuth } from "../../../state-management/slices/userProfile";
+import { fetchUserProfileInfo, setIsAuth, setLoading } from "../../../state-management/slices/userProfile";
 import Wrapper from "../../../components/sheard/AuthWrapper";
 
 const { Title } = Typography;
@@ -15,6 +15,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const [ form ] = Form.useForm();
 
+    dispatch(setLoading(false));
     useEffect(() => {
         navigate(ROUTE_CONSTANTS.LOGIN);
     },[navigate]);

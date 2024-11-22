@@ -43,7 +43,7 @@ const Resume = ({ data }) => {
     } = data;
 
 console.log(data)
-const proxyUrl = `https://<reactresumebuilder>.netlify.app/api/proxy?url=${encodeURIComponent(imgUrl)}`;
+const proxyUrl = `https://673fb6ad5ae9b2a19ecc449f--reactresumecvbuilder.netlify.app/api/proxy?url=${encodeURIComponent(imgUrl)}`;
 
     return(
         <>

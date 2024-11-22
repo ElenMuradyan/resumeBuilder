@@ -1,7 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from "react-router-dom";
 import Register from "./pages/auth/Register";
-import { PersistGate } from "redux-persist/es/integration/react";
-import { persistor } from "./state-management/reduxPersist";
 import Login from "./pages/auth/Login";
 import MainPage from "./pages/MainPage";
 import MainLayout from "./layouts/MainLayout";
@@ -26,7 +24,6 @@ function App() {
   },[dispatch]);
 
   return (
-    <PersistGate loading={null} persistor={persistor}>
     <LoadingWrapper>
       <RouterProvider
       router={
@@ -53,7 +50,6 @@ function App() {
       }
       />
     </LoadingWrapper>
-    </PersistGate>
   )
 }
 

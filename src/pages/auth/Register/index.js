@@ -6,17 +6,20 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Wrapper from "../../../components/sheard/AuthWrapper";
-
+import { useDispatch } from "react-redux";
+import { setLoading } from "../../../state-management/slices/userProfile";
 const { Title } = Typography;
 
 const Register = () => {
     const [ form ] = Form.useForm();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleRegister = async values => {
         const { firstName, lastName, email, password } = values;
 
         try{
+            dispatch(setLoading(true));
             const response = await createUserWithEmailAndPassword(auth, email, password);
             const { uid } = response.user;
             const createDoc = doc(db, FIRESTORE_PATH_NAMES.REGISTER_USERS, uid);
@@ -29,6 +32,8 @@ const Register = () => {
             notification.error({
                 message: 'Invalid Register Credentials'
             })
+        }finally{
+            dispatch(setLoading(false))
         }
     };
 

@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import avatar from '../../../core/Images/avatar.webp';
 import './index.css'
 
 const { Title, Text, Link } = Typography;
@@ -19,7 +18,7 @@ const Resume = ({ data }) => {
         html2canvas(resumeRef.current, { useCORS: true }).then((canvas) => {
             const pdf = new jsPDF();
             const imgData = canvas.toDataURL('image/png');
-            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 4, canvas.height / 4);
+            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 5, canvas.height / 5);
             pdf.save('resume.pdf');
         })
     };
@@ -42,6 +41,7 @@ const Resume = ({ data }) => {
                 linkedin
             }
     } = data;
+console.log(imgUrl);
 
     return(
         <>
@@ -61,7 +61,7 @@ const Resume = ({ data }) => {
                     <Text className="avatar_text"><FontAwesomeIcon icon={faMapMarkerAlt} style={{ fontSize: '20px', color: '#1890ff', marginRight: '10px' }} /> {adress}</Text>
                     <Text className="avatar_text"><FontAwesomeIcon icon={faEnvelope} style={{ fontSize: '20px', color: '#1890ff', marginRight: '10px' }} />{email}</Text>
                 </Flex>
-                <Avatar src={imgUrl || avatar} alt="Resume" size={200}/>
+                <Avatar src={imgUrl} alt="Resume" size={200}/>
                 </Flex>
                 <Flex vertical>
                 <Title style={{color: 'white'}}>CONTACT</Title>

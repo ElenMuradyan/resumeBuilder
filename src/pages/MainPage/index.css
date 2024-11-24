@@ -1,0 +1,6 @@
+.Input{
+    height: 30px;
+}
+.formItem .ant-form-item-label > label {
+    font-size: 18px;
+}

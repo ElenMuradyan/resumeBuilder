@@ -28,8 +28,8 @@ const ResumesPage = () => {
     resumes.map((item, idx) => {
         return(
             <Link to={`${ROUTE_CONSTANTS.RESUMES}/${item.id}`}>
-                <div key={idx} className="resumeLink" style={{marginTop: 200, width: 500, height: 300}}>
-                    <Typography.Title style={{color: 'white', textAlign:'center'}} level={2}>
+                <div key={idx} className="resumeLink" style={{marginTop: 200, width: 300, height: 150}}>
+                    <Typography.Title style={{color: 'white', textAlign:'center'}} level={5}>
                          {`Resume Description: ${item.profileSection.description}`}
                          <br/>
                          Click and see your resume

@@ -72,7 +72,7 @@ const MiniProjectSection = () => {
 
     return(
         <>
-        <Title style={{color: token.blue, textAlign: 'center'}}>Add your Mini Projects</Title>
+        <Title level={5} style={{color: token.blue, textAlign: 'center', marginBottom:0}}>Add your Mini Projects</Title>
         <div>
             <Form form={form} onFinish={handleData} onValuesChange={handleFieldChange} layout="vertical" style={{padding: '3%'}}>
                 {
@@ -119,11 +119,11 @@ const MiniProjectSection = () => {
                         )
                     })
                  } 
-                  <Button type="primary"  style={{margin: 10}} size="large" onClick={handleAddProject}>Add Project</Button>
-                  <Button type="primary" size="large" disabled={miniProjects.length === 1} onClick={handleDeleteProject}>Delete Project</Button>
-                  <br/><br/>
-                <Button type="primary" size="large" htmlType='submit'>Save</Button>
-                <Title level={3} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
+                  <Button type="primary"  style={{margin: 10}} onClick={handleAddProject}>Add Project</Button>
+                  <Button type="primary" disabled={miniProjects.length === 1} onClick={handleDeleteProject}>Delete Project</Button>
+                  <br/>
+                <Button type="primary" htmlType='submit'>Save</Button>
+                <Title level={5} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
             </Form>
         </div>
         </>

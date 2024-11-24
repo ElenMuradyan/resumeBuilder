@@ -18,9 +18,8 @@ const ResumePage = () => {
     const getResumes = useCallback(async () => {
         try {
             const res = await fetchResumeById(uid, id);
-            console.log(res);
             setData(res);
-        } catch (error) {
+        }catch (error) {
             console.error('Error fetching resume:', error);
         }
 
@@ -36,7 +35,11 @@ const ResumePage = () => {
 
 
     return (
-    <Flex align="center" justify="center" vertical style={{width: '100%', height: '100vh - 80px', marginTop: 500}}>
+    <Flex align="center" 
+    justify="center" 
+    vertical 
+    style={{width: '100%',
+    height: '100vh - 80px'}}>
             <Title style={{color: 'white'}}>Your Resume</Title>
                 <Resume data={data} />
                 <Typography.Text style={{ color: 'white' }}>

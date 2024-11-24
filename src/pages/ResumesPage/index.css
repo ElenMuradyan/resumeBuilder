@@ -9,3 +9,6 @@
 .resumeLink:hover{
 opacity: 0.8;
 }
+.resumes_container{
+    height: 100vh;
+}

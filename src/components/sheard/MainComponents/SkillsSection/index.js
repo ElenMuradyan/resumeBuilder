@@ -47,7 +47,8 @@ const SkillsSection = () => {
         notification.error({
             message: 'I see you forgot to save the changes you made!'
         })}else{
-            addResumeDetails(uid, resumeId, resumeData);
+            addResumeDetails(uid, resumeId, {created: true, ...resumeData});
+            addResumeDetails(uid, resumeId, {created: true});
             dispatch(setCreated());
             navigate(`resume/${resumeId}`);
             dispatch(setLoading(true));

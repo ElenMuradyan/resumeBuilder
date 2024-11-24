@@ -20,7 +20,7 @@ const ResumesPage = () => {
         getResumes()
     },[getResumes])
    
-    return(<div style={{height: '100vh'}}>
+    return(<div className="resumes_container">
 {
     resumes.length === 0 ? <p style={{color: 'white'}}>It seems like you don't have created resumes</p> :
     <Flex wrap="wrap" gap={50} align="center" justify="center" style={{width: '100%'}}>

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import avatar from '../../../core/Images/avatar.webp';
 import './index.css'
 
 const { Title, Text, Link } = Typography;
@@ -18,7 +19,7 @@ const Resume = ({ data }) => {
         html2canvas(resumeRef.current, { useCORS: true }).then((canvas) => {
             const pdf = new jsPDF();
             const imgData = canvas.toDataURL('image/png');
-            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 2.4, canvas.height / 2.35);
+            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 4, canvas.height / 4);
             pdf.save('resume.pdf');
         })
     };
@@ -42,9 +43,6 @@ const Resume = ({ data }) => {
             }
     } = data;
 
-console.log(data)
-const proxyUrl = `https://673fb6ad5ae9b2a19ecc449f--reactresumecvbuilder.netlify.app/api/proxy?url=${encodeURIComponent(imgUrl)}`;
-
     return(
         <>
             <Flex 
@@ -58,12 +56,12 @@ const proxyUrl = `https://673fb6ad5ae9b2a19ecc449f--reactresumecvbuilder.netlify
             >
             <Flex className="avatar_container" align="center" justify="space-between" vertical>
                 <Flex gap={20} vertical>
-                <Avatar src={proxyUrl} alt="Resume" size={200}/>
                 <Flex gap={20} vertical>
                     <Text className="avatar_text"><FontAwesomeIcon icon={faPhoneAlt} style={{ fontSize: '20px', color: '#1890ff', marginRight: '10px' }}/> {phoneNumber}</Text>
                     <Text className="avatar_text"><FontAwesomeIcon icon={faMapMarkerAlt} style={{ fontSize: '20px', color: '#1890ff', marginRight: '10px' }} /> {adress}</Text>
                     <Text className="avatar_text"><FontAwesomeIcon icon={faEnvelope} style={{ fontSize: '20px', color: '#1890ff', marginRight: '10px' }} />{email}</Text>
                 </Flex>
+                <Avatar src={imgUrl || avatar} alt="Resume" size={200}/>
                 </Flex>
                 <Flex vertical>
                 <Title style={{color: 'white'}}>CONTACT</Title>

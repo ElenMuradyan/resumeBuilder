@@ -18,7 +18,7 @@ const Resume = ({ data }) => {
         html2canvas(resumeRef.current, { useCORS: true }).then((canvas) => {
             const pdf = new jsPDF();
             const imgData = canvas.toDataURL('image/png');
-            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 4.8, canvas.height / 4.8);
+            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 4.7, canvas.height / 4.6);
             pdf.save('resume.pdf');
         })
     };

@@ -1,7 +1,8 @@
 .avatar_container{
     padding: 30px;
     width: 40%;
-    background-color: #222;
+    height: auto;
+    background-color: #37373aa8;
 }
 
 .avatar_text{
@@ -40,4 +41,16 @@ p{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+@media print {
+    .resume_component {
+        width: 100%; 
+        height: auto;
+    }
+
+    .resume_container {
+        width: 100%;
+        height: auto;
+    }
 }

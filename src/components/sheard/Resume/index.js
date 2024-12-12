@@ -6,10 +6,11 @@ import { useSelector } from "react-redux";
 import { useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import './index.css'
 import { STYLES } from "../../../core/utils/constants";
 
-const { Title, Text, Link } = Typography;
+import './index.css'
+
+const { Title, Link } = Typography;
 
 const Resume = ({ data }) => {
     const resumeRef = useRef();
@@ -44,7 +45,7 @@ const Resume = ({ data }) => {
     } = data;
 
     return(
-        <>
+        <div className="resume_component"> 
             <Flex 
             ref={resumeRef}
             className="resume_container"
@@ -106,7 +107,7 @@ const Resume = ({ data }) => {
         </Flex>
         <br/>
         <Button size="large" type='primary' onClick={downloadResumeAsPDF}>Download Resume as PDF</Button>
-        </>
+        </div>
 
 )
 };

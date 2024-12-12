@@ -3,8 +3,6 @@ import { items } from '../../core/utils/mainPage';
 import { useSelector, useDispatch } from 'react-redux';
 import { incrementCurrent, decrementCurrent, setCurrent } from '../../state-management/slices/mainSlice';
 
-import './index.css';
-
 const { Title } = Typography;
 
 const MainPage = () => {
@@ -32,6 +30,7 @@ const MainPage = () => {
     borderRadius: token.borderRadiusLG,
     border: `1px dashed ${token.blue}`,
   };
+  
   return (
     <Flex align='center' vertical style={{width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.739)'}}>
     <Title level={4} style={{color:token.blue}}>Create Your Resume</Title>

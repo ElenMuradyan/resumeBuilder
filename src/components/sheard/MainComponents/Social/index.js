@@ -28,7 +28,7 @@ const SocialSection = () => {
 
     return(
         <>
-            <Title style={{color: token.blue, textAlign: 'center'}}>Add your Social Links</Title>
+            <Title level={5} style={{color: token.blue, textAlign: 'center',  marginBottom:0}}>Add your Social Links</Title>
             <Form form={form} onFinish={handleFinish} onFieldsChange={onChange} layout="vertical" style={{padding: '3%'}}>
                 <Form.Item
                 className="formItem"
@@ -78,8 +78,8 @@ const SocialSection = () => {
                 >
                     <Input className="Input" placeholder='LinkedIn Link' type='text'></Input>
                 </Form.Item>
-                <Button size="large" htmlType='submit' type='primary'>Save</Button>
-                <Title level={3} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
+                <Button htmlType='submit' type='primary'>Save</Button>
+                <Title level={5} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
             </Form>
         </>
     )

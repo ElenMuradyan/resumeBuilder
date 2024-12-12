@@ -76,7 +76,7 @@ const EducationSection = () => {
   
     return(
         <>
-        <Title style={{color: token.blue, textAlign: 'center'}}>Add your Education Details</Title>
+        <Title level={5} style={{color: token.blue, textAlign: 'center', marginBottom:0}}>Add your Education Details</Title>
         <div>
             <Form form={form} 
             onFinish={handleData} 
@@ -140,11 +140,10 @@ const EducationSection = () => {
                         )
                     })
                  } 
-                  <Button size="large" type='primary' style={{margin: 10}} onClick={handleAddEducation}>Add Education</Button>
-                  <Button size="large" type='primary' disabled={educationSection.length === 1} onClick={handleDeleteEducation}>Delete Education</Button>
-                  <br/><br/>
-                <Button size="large" htmlType='submit' type='primary'>Save</Button>
-                <Title level={3} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
+                    <Button  type='primary' style={{margin: 10}} onClick={handleAddEducation}>Add Education</Button>
+                    <Button  type='primary' disabled={educationSection.length === 1} onClick={handleDeleteEducation}>Delete Education</Button><br/>
+                    <Button htmlType='submit' type='primary'>Save</Button>
+                    <Title level={5} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>    
             </Form>
         </div>
         </>

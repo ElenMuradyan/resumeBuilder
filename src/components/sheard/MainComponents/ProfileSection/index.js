@@ -105,8 +105,8 @@ const ProfileSection = () => {
     };
 
     return(
-        <Flex align="center" justify="center" vertical style={{width: '100%', padding: 10 }}>
-        <Title style={{color: token.blue}}>Add your profile details</Title>
+        <Flex align="center" justify="center" vertical style={{width: '100%', padding: 10,  marginBottom:0 }}>
+        <Title level={5} style={{color: token.blue,  marginBottom:0}}>Add your profile details</Title>
         <Form 
         onFieldsChange={handleChange}
         form={form}
@@ -177,6 +177,8 @@ const ProfileSection = () => {
                 </Form.Item>
                 </Col>
             </Flex>
+            <Flex justify="space-between" align="center">
+            <Col style={{width: '20%'}}>
             <Form.Item
               label='Upload Your Photo'
                 className="formItem"
@@ -192,7 +194,9 @@ const ProfileSection = () => {
                 handleDelete={handleDelete}
                 />
             </Form.Item>
-                    <Form.Item
+            </Col>
+            <Col style={{width: '80%'}}>
+            <Form.Item
                 label='Description for resume'
                 className="formItem"
                 name='description'
@@ -203,8 +207,10 @@ const ProfileSection = () => {
                 >
                     <Input className="Input" placeholder="Description" type='text'></Input>
                 </Form.Item>
-            <Button size="large" type='primary' htmlType='submit'>Save</Button>
-            <Title level={4} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
+                <Button type='primary' htmlType='submit'>Save</Button>
+                <Title level={5} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
+            </Col>
+            </Flex>
             </Form>
         </Flex>
     )

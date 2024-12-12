@@ -22,7 +22,6 @@ const ResumePage = () => {
         }catch (error) {
             console.error('Error fetching resume:', error);
         }
-
     }, [uid, id]);
 
     useEffect(() => {

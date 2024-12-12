@@ -58,7 +58,7 @@ const SkillsSection = () => {
 
     return(
         <>
-            <Title style={{color: token.blue, textAlign: 'center'}}>Add your Skills</Title>
+            <Title level={4} style={{color: token.blue, textAlign: 'center',  marginBottom:0}}>Add your Skills</Title>
             <Select
                 label='Your Skills'
                 value={skillsSection}

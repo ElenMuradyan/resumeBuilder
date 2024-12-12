@@ -32,3 +32,9 @@ export const PhoneNumberValidation = (rule, value) => {
     return Promise.resolve();
 };
 
+export const STYLES = {
+    WHITE: 'white',
+    FONTSIZE: 10,
+    OPACITE: 'rgba(255, 255, 255, 0.636)',
+    BLUE: '#1890ff'
+}

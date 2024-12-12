@@ -7,7 +7,7 @@ const ImgUpload = ({ progress, uploading, handleUpload, handleDelete }) => {
     const { imgUrl } = useSelector(store => store.resumeInfo.resumeData.profileSection);
     const uploadButton = (
         <button style={{ border: 0, background: 'none'}} type="button">
-            {uploading ? <Progress type="circle" percent={progress} size={70}/> : <PlusOutlined/>}
+            {uploading ? <Progress type="circle" percent={progress} size={70}/> : <PlusOutlined style={{fontSize: 18}}/>}
             <div style={{ marginTop: 8}}>Upload</div>
         </button>
     );

@@ -4,7 +4,6 @@ body{
     width: 100%;
     min-height: 100vh;
     overflow-x: hidden;
-    background-image: url('../core/Images/background.avif');
     background-position: center;
     background-size: cover;
 }

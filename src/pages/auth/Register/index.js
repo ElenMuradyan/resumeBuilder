@@ -36,7 +36,6 @@ const Register = () => {
             dispatch(setLoading(false))
         }
     };
-
     return(
         <Wrapper title='Sign up' height='100vh'>
         <Form form={form} layout="vertical" onFinish={handleRegister}>

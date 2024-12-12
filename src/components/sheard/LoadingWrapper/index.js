@@ -1,11 +1,14 @@
 import { Spin, Flex } from "antd";
 import { useSelector } from "react-redux";
+
+import './index.css';
+
 const LoadingWrapper = ({ children }) => {
     const { loading } = useSelector(store => store.userProfile);
 
     return (<>
         {loading ?
-         <Flex style={{width:'100%', height:'100vh', backgroundColor: 'rgba(0, 0, 0, 0.3)'}} justify='center' align='center' vertical>
+         <Flex justify='center' align='center' className="loading" vertical>
             <Spin
             size='large'
             tip="Please wait..."

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsAuth } from "../../../state-management/slices/userProfile";
 import { ROUTE_CONSTANTS } from "../../../core/utils/constants";
+
 import './index.css';
 
 const { Text } = Typography;

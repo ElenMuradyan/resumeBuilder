@@ -1,4 +1,5 @@
 import { Typography, Flex } from 'antd';
+import { STYLES } from '../../../core/utils/constants';
 
 import './index.css';
 
@@ -8,7 +9,7 @@ const Wrapper = ({ title, children, height }) => {
 return(
 <Flex align='center' justify='center' className='container' style={{height: height}}>
 <Flex className='wrapper' vertical>   
-        <Title className="custom-title" level={3} style={{color:'rgba(0, 60, 255, 0.64)'}}>
+        <Title className="custom-title" level={3} style={{color: STYLES.WRAPPERTITLECOLOR}}>
             { title }
         </Title>
         {children}

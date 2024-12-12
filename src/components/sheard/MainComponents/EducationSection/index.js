@@ -29,7 +29,6 @@ const EducationSection = () => {
         })
             dispatch(setEducationSection(valueData));
             dispatch(setSavedToTrue('EducationSection'));
-
         };
 
         const handleAddEducation = () => {

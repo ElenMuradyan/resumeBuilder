@@ -1,14 +1,15 @@
 import { Upload, Progress, Flex } from "antd";
 import { PlusOutlined } from '@ant-design/icons';
 import { useSelector } from "react-redux";
+import { STYLES } from "../../../core/utils/constants";
 
 const ImgUpload = ({ progress, uploading, handleUpload, handleDelete }) => {
     const { firstName, lastName, uid } = useSelector(store => store.userProfile.userProfileInfo.userData);
     const { imgUrl } = useSelector(store => store.resumeInfo.resumeData.profileSection);
     const uploadButton = (
         <button style={{ border: 0, background: 'none'}} type="button">
-            {uploading ? <Progress type="circle" percent={progress} size={70}/> : <PlusOutlined/>}
-            <div style={{ marginTop: 8}}>Upload</div>
+            {uploading ? <Progress type="circle" percent={progress} size={70}/> : <PlusOutlined style={{fontSize: STYLES.FONTSIZE}}/>}
+            <div style={{ marginTop: STYLES.MARGIN}}>Upload</div>
         </button>
     );
 
@@ -28,8 +29,8 @@ const ImgUpload = ({ progress, uploading, handleUpload, handleDelete }) => {
                 showUploadList={{ showPreviewIcon: false, showRemoveIcon: true }}
                 onRemove={handleDelete}
                 >
-        {!imgUrl && uploadButton}
-        </Upload>
+                    {!imgUrl && uploadButton}
+                </Upload>
         </Flex>
     )
 }

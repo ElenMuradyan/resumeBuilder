@@ -1,7 +1,8 @@
 .avatar_container{
     padding: 30px;
     width: 40%;
-    background-color: #222;
+    height: auto;
+    background-color: #37373aa8;
 }
 
 .avatar_text{
@@ -11,4 +12,45 @@
 .avatar_link{
     color: rgba(255, 255, 255, 0.636);
     text-decoration: none;
+}
+
+p{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+.course_name, .project_name{
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.resume_container{
+    width: 397px;
+    height: 570px;
+}
+
+.contact_text{
+    font-size: 20px;
+    margin: 0;
+    color: white;
+}
+
+.resume_component{
+    width: 397px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media print {
+    .resume_component {
+        width: 100%; 
+        height: auto;
+    }
+
+    .resume_container {
+        width: 100%;
+        height: auto;
+    }
 }

@@ -30,9 +30,10 @@ const MainPage = () => {
     borderRadius: token.borderRadiusLG,
     border: `1px dashed ${token.blue}`,
   };
+  
   return (
     <Flex align='center' vertical style={{width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.739)'}}>
-    <Title style={{color:token.blue}}>Create Your Resume</Title>
+    <Title level={4} style={{color:token.blue}}>Create Your Resume</Title>
    <Flex align='center' gap={10} vertical style={{padding:'10px', width: '100%'}}>
       <Tabs 
       activeKey={String(current)} 

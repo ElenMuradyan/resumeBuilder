@@ -1,219 +1,133 @@
-import { Form, Input, Typography, Flex, Col, Button, message, notification, theme } from "antd";
-import { PhoneNumberValidation } from "../../../../core/utils/constants";
+import { Typography, Form, Input, Button, theme, notification } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { setProfileSection } from "../../../../state-management/slices/ResumeInfo";
-import { useState } from 'react';
-import { storage, db } from "../../../../services/firebase";
-import { STORAGE_PATH_NAMES,FIRESTORE_PATH_NAMES } from "../../../../core/utils/constants";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { setImgUrl } from "../../../../state-management/slices/ResumeInfo";
-import { doc, updateDoc } from "firebase/firestore";
-import ImgUpload from "../../ImgUpload";
+import { setMiniProjectSection } from "../../../../state-management/slices/ResumeInfo";
+import { miniProject } from "../../../../state-management/slices/ResumeInfo";
 import { setSavedToFalse, setSavedToTrue } from "../../../../state-management/slices/mainSlice";
 
 const { Title } = Typography;
 
-const ProfileSection = () => {
-    const { token } = theme.useToken()
-    const [ uploading, setUploading ] = useState(false);
-    const [ progress, setProgress ] = useState(0);
+const MiniProjectSection = () => {
+    const { token } = theme.useToken();
     const [ form ] = Form.useForm();
-    const { resumeData: { profileSection, profileSection: {imgUrl} } } = useSelector(store => store.resumeInfo);
-    const { resumeId } = useSelector(state => state.resumeInfo);
-    const { userData: { uid } } = useSelector(store => store.userProfile.userProfileInfo);
-    const { pages } = useSelector(state => state.main);
     const dispatch = useDispatch();
+    const { miniProjects } = useSelector(store => store.resumeInfo.resumeData);
+    const { pages } = useSelector(state => state.main);
 
     const handleData = async values => {
-        if(imgUrl){
-            dispatch(setSavedToTrue('ProfileSection'));
-            const valuesdata = {
-                imgUrl: imgUrl,
-                ...values
-            };
-            dispatch(setProfileSection(valuesdata));
-            notification.success({
-                message: 'Data sent successfully',
-            })
-        }else{
-            notification.error({
-                message: 'Upload your photo!'
-            })
+        dispatch(setSavedToTrue('MiniProjectSection'));
+        const keys = Object.keys(values);
+        let valueData = [];
+        for( let i = 0; i<keys.length/3; i++){
+            const data = {
+                name: values[`name${i}`],
+                techStack: values[`techStack${i}`],
+                description: values[`description${i}`],
+            }
+            valueData.push(data);
         }
+        notification.success({
+            message: 'Data sent successfully:)',
+        });
+            dispatch(setMiniProjectSection(valueData));
         };
 
-        const updateUserProfileImg = async (imgUrl) => {            
-            try{
-                const userRef = doc(db, FIRESTORE_PATH_NAMES.REGISTER_USERS, uid);
-                const resumeRef = doc(userRef, FIRESTORE_PATH_NAMES.RESUMES, resumeId);
-
-                await updateDoc(resumeRef, { 
-                    profileSection: {
-                        imgUrl: imgUrl
-                    }
-                })
-            }catch(e){
-                console.log(e)
-                notification.error({
-                    message:'Error:('
-                })
-            }
-        }
-
-        const handleUpload = ({file}) => {
-            setUploading(true);
-            const storageRef = ref(storage, `${STORAGE_PATH_NAMES.RESUME_IMAGES}/${uid}`);
-            const uploadTask = uploadBytesResumable(storageRef, file);
-
-            uploadTask.on('state_changed', 
-                (snapshot) => {
-                    const progressValue = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-                    setProgress(progressValue);
-            },
-            (error) => {
-                setUploading(false);
-                setProgress(0);
-                message.error(`Error uploading file ${error.message}`);
-            },
-            () => {
-                getDownloadURL(uploadTask.snapshot.ref)
-                .then((imgUrl) => {
-                    setUploading(false);
-                    setProgress(0);
-                    updateUserProfileImg(imgUrl);
-                    dispatch(setImgUrl(imgUrl));
-                    notification.success({
-                        message:'Upload successfully'
-                    })
-                })
-            }
-        )
+    const handleAddProject = () => {
+        const updatedProjects = [...miniProjects, miniProject];
+        dispatch(setMiniProjectSection(updatedProjects));
+        form.setFieldsValue(updatedProjects.reduce((acc, project, idx) => {
+            acc[`name${idx}`] = project.name;
+            acc[`techStack${idx}`] = project.techStack;
+            acc[`description${idx}`] = project.description;
+            return acc;
+        }, {}));
     };
 
-    const handleDelete = () => {
-        dispatch(setImgUrl(''));
-        dispatch(setSavedToFalse('ProfileSection'));
-        notification.error({
-            message: 'Upload your photo!'
-        })
-    }
-
-    const handleChange = () => {
-        if(pages.ProfileSection.saved === true){
-            dispatch(setSavedToFalse('ProfileSection'));
-        };
+    const handleDeleteProject = () => {
+        const updatedProjects = [...miniProjects.slice(0, miniProjects.length - 1)];
+        dispatch(setMiniProjectSection(updatedProjects));
+        form.setFieldsValue(updatedProjects.reduce((acc, project, idx) => {
+            acc[`name${idx}`] = project.name;
+            acc[`techStack${idx}`] = project.techStack;
+            acc[`description${idx}`] = project.description;
+            return acc;
+        }, {}));
+    };
+    
+    const handleFieldChange = (_, allvalues) => {
+        if(pages.MiniProjectSection.saved === true){
+            dispatch(setSavedToFalse('MiniProjectSection'));
+        }
+        const keys = Object.keys(allvalues);
+        let valueData = [];
+        for( let i = 0; i<keys.length/4; i++){
+            const data = {
+                name: allvalues[`name${i}`],
+                techStack: allvalues[`techStack${i}`],
+                description: allvalues[`description${i}`],
+            }
+            valueData.push(data);
+        }
+            dispatch(setMiniProjectSection(valueData));
     };
 
     return(
-        <Flex align="center" justify="center" vertical style={{width: '100%', padding: 10,  marginBottom:0 }}>
-        <Title level={5} style={{color: token.blue,  marginBottom:0}}>Add your profile details</Title>
-        <Form 
-        onFieldsChange={handleChange}
-        form={form}
-        onFinish={handleData}
-        initialValues={profileSection}
-        style={{width: '100%', padding: '3%'}}
-        layout="vertical"
-        > 
-            <Flex justify='space-between'>
-                <Col style={{width: '48%'}}>
-                    <Form.Item
-                label='First Name'
-                className="formItem"
-                name='firstName'
-                rules={[{
-                    required: true,
-                    message: 'Please enter your first name'
-                }]}
-                >
-                    <Input className="Input" placeholder="First Name" type='text'></Input>
-                </Form.Item>
-                </Col>
-
-                <Col style={{width: '48%'}}>
-                    <Form.Item
-                label='Last Name'
-                className="formItem"
-                name='lastName'
-                rules={[{
-                    required: true,
-                    message: 'Please enter your last name'
-                }]}
-                >
-                    <Input className="Input" placeholder="Last Name" type='text'></Input>
-                </Form.Item>
-                </Col>
-            </Flex>
-            <Flex justify='space-between'>
-            <Col style={{width: '48%'}}>
-            <Form.Item
-              label='Phone Number'
-                className="formItem"
-                name='phoneNumber'
-                rules={[{
-                    required: true,
-                    message: 'Please enter your phone number',
-                },
+        <>
+        <Title style={{color: token.blue, textAlign: 'center'}}>Add your Mini Projects</Title>
+        <div>
+            <Form form={form} onFinish={handleData} onValuesChange={handleFieldChange} style={{padding: '3%'}} layout="vertical">
                 {
-                    validator: PhoneNumberValidation,
-                }
-                ]}
-                >
-                    <Input className="Input" placeholder="Phone Number" type='text'></Input>
-                </Form.Item>
-                </Col>
-
-                <Col style={{width: '48%'}}>
-                    <Form.Item
-                      label='Adress'
-                className="formItem"
-                name='adress'
-                rules={[{
-                    required: true,
-                    message: 'Please enter your adress'
-                }]}
-                >
-                    <Input className="Input" placeholder="Adress" type='text'></Input>
-                </Form.Item>
-                </Col>
-            </Flex>
-            <Flex justify="space-between" align="center">
-            <Col style={{width: '20%'}}>
-            <Form.Item
-              label='Upload Your Photo'
-                className="formItem"
-            rules={[{
-                required: true,
-                message: 'Upload your photo'
-            }]}
-            >
-                <ImgUpload
-                progress={progress} 
-                uploading={uploading} 
-                handleUpload={handleUpload}
-                handleDelete={handleDelete}
-                />
-            </Form.Item>
-            </Col>
-            <Col style={{width: '80%'}}>
-            <Form.Item
-                label='Description for resume'
-                className="formItem"
-                name='description'
-                rules={[{
-                    required: true,
-                    message: 'Please enter your first name'
-                }]}
-                >
-                    <Input className="Input" placeholder="Description" type='text'></Input>
-                </Form.Item>
-                <Button type='primary' htmlType='submit'>Save</Button>
-                <Title level={5} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
-            </Col>
-            </Flex>
+                    miniProjects.map((project, idx)=> {
+                        return(
+                            <div key={idx}>
+                             <Form.Item
+                             className="formItem"
+                            label='Project Name'
+                            name={`name${idx}`}
+                            initialValue={project.name}
+                            rules={[{
+                                required:true,
+                                message: 'Enter Project Name!'
+                            }]}
+                            >
+                                <Input className="Input" placeholder="Project Name" type="text"/>
+                            </Form.Item>
+                            <Form.Item
+                            className="formItem"
+                            label='Tech Stack'
+                            name={`techStack${idx}`}
+                            initialValue={project.techStack}
+                            rules={[{
+                                required:true,
+                                message: 'Enter the Tech Stack!'
+                            }]}
+                            >
+                                <Input className="Input" placeholder="Tech Stack" type="text"/>
+                            </Form.Item>
+                                <Form.Item
+                                className="formItem"
+                            label='Description'
+                            name={`description${idx}`}
+                            initialValue={project.description}
+                            rules={[{
+                                required:true,
+                                message: 'Enter the Description!'
+                            }]}
+                            >
+                                <Input className="Input" placeholder="Description" type="text"/>
+                                </Form.Item>
+                            </div>
+                        )
+                    })
+                 } 
+                  <Button type="primary"  style={{margin: 10}} onClick={handleAddProject}>Add Project</Button>
+                  <Button type="primary" disabled={miniProjects.length === 1} onClick={handleDeleteProject}>Delete Project</Button>
+                  <br/><br/>
+                <Button type="primary" htmlType='submit'>Save</Button>
+                <Title level={3} style={{color:'rgba(0, 136, 255, 0.7)', margin:0}}>If you have made changes don't forget to save them</Title>
             </Form>
-        </Flex>
+        </div>
+        </>
     )
-}
+};
 
-export default ProfileSection;
+export default MiniProjectSection;
